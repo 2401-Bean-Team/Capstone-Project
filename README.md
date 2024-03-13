@@ -1,6 +1,6 @@
 #  🚀 Capstone Boilerplate
 
-A template for building web applications using the PERN (PostgreSQL, Express.js, React, Node.js) stack. 
+A template for building web applications using the PERN (PostgreSQL, Express.js, React, Node.js) stack.
 
 ##  🏁 Getting Started
 
@@ -50,3 +50,6 @@ npm run dev
 9. Open your browser at `http://localhost:3000`
 
 10. Build something cool! 😎
+
+
+Update
