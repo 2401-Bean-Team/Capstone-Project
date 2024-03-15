@@ -34,70 +34,70 @@ const users = [
 const products = [
   {
     name: "Sunrise Blend",
-    price: "$19.99",
+    price: "19.99",
     description: "Start your day with this vibrant blend of light and medium roast beans, offering a smooth and energizing flavor profile with hints of citrus and floral notes.",
     roast: "Light/Medium",
     image: "https://freeimage.host/i/JWQxXzx",
   },
   {
     name: "Mountain Mocha",
-    price: "$19.99",
+    price: "19.99",
     description: "Crafted from beans grown at high altitudes, this medium-dark roast delivers a bold and rich taste, featuring deep chocolate undertones and a satisfyingly smooth finish.",
     roast: "Medium/Dark",
     image: "https://freeimage.host/i/JWQzRYF",
   },
   {
     name: "Golden Sunrise",
-    price: "$19.99",
+    price: "19.99",
     description: "Wake up to the golden hues of this light roast, boasting a delicate aroma and a lively flavor profile characterized by fruity and floral notes, reminiscent of a crisp morning breeze.",
     roast: "Light",
     image: "https://freeimage.host/i/JWQzlQR",
   },
   {
     name: "Midnight Espresso",
-    price: "$19.99",
+    price: "19.99",
     description: "Indulge in the deep, intense flavors of this dark roast espresso blend, with its robust body, bold aroma, and bittersweet chocolate overtones, perfect for a late-night pick-me-up.",
     roast: "Dark",
     image: "https://freeimage.host/i/JWQIjcP",
   },
   {
     name: "Harvest Haze",
-    price: "$19.99",
+    price: "19.99",
     description: "Embrace the warmth of autumn with this medium roast blend, offering a comforting blend of caramelized sweetness, nutty undertones, and a hint of spice, reminiscent of a cozy harvest gathering.",
     roast: "Medium",
     image: "https://freeimage.host/i/JWQIYc7",
   },
   {
     name: "Tropical Sunrise",
-    price: "$19.99",
+    price: "19.99",
     description: "Transport yourself to a tropical paradise with this exotic blend of light and medium roast beans, featuring bright and fruity flavors, accented by hints of coconut and pineapple, for a taste of sunshine in every cup.",
     roast: "Light/Medium",
     image: "https://freeimage.host/i/JWQTDkF",
   },
   {
     name: "Silken Sunset",
-    price: "$19.99",
+    price: "19.99",
     description: "Unwind with the smooth and velvety texture of this medium-dark roast, boasting a rich caramel sweetness, subtle hints of toasted almonds, and a lingering finish that evokes the tranquility of a peaceful sunset.",
     roast: "Medium/Dark",
     image: "https://freeimage.host/i/JWQTBiQ",
   },
   {
     name: "Fireside Reserve",
-    price: "$19.99",
+    price: "19.99",
     description: " Cozy up by the fireplace with this bold and robust dark roast, offering deep, smoky flavors, earthy undertones, and a touch of spice, reminiscent of a crackling fire on a chilly evening.",
     roast: "Dark",
     image: "https://freeimage.host/i/JWQIo9n",
   },
   {
     name: "Moonlight Mocha",
-    price: "$19.99",
+    price: "19.99",
     description: " Savor the velvety smoothness of this medium-dark roast mocha blend, featuring decadent chocolate flavors, balanced by subtle undertones of toasted nuts and a hint of sweetness, for a luxurious coffee experience under the moonlight.",
     roast: "Medium/Dark",
     image: "https://freeimage.host/i/JWQI6lI",
   },
   {
     name: "Artisanal Amber",
-    price: "$19.99",
+    price: "19.99",
     description: " Discover the artisanal craftsmanship of this light roast blend, characterized by its vibrant amber color, delicate floral aroma, and complex flavor profile, showcasing notes of honey, jasmine, and citrus zest, for a truly refined coffee experience.",
     roast: "Light",
     image: "https://freeimage.host/i/JWQIFGp",
@@ -149,7 +149,7 @@ const createTables = async () => {
           price DECIMAL,
           description TEXT,
           roast TEXT,
-          "imageUrl" TEXT
+          image TEXT
       )`)
     }
     catch(err) {
@@ -188,7 +188,7 @@ const insertUsers = async () => {
 const insertProducts = async () => {
   try {
     for (const product of products) {
-      await createUser({name: product.name, price: product.price, description: product.description, roast: product.roast, image: product.image});
+      await createProduct({name: product.name, price: product.price, description: product.description, roast: product.roast, image: product.image});
     }
     console.log('Seed data (products) inserted successfully.');
   } catch (error) {
