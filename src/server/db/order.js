@@ -1,7 +1,7 @@
 const db = require('./client')
 
-// -create neworder, -getorder function, 
-// updateorders (patch: shipping-address, status), 
+// -create neworder, -getorder function,
+// updateorders (patch: shipping-address, status),
 
 const createOrder = async ({ userId }) => {
     try{
@@ -18,8 +18,8 @@ const createOrder = async ({ userId }) => {
 const getOrder = async ({ orderId }) => {
     try{
       const { rows } = await db.query(`
-        SELECT * FROM orders 
-        WHERE id=$1 
+        SELECT * FROM orders
+        WHERE id=$1
         `, [ orderId ]);
         return rows;
     } catch (err) {
@@ -54,3 +54,10 @@ const updateStatus = async (orderId, status) => {
         throw err;
         }
     }
+
+module.exports = {
+createOrder,
+getOrder,
+updateAddress,
+updateStatus
+}

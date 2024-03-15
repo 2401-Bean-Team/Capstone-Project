@@ -41,13 +41,13 @@ try{
     const { id, name, price, description, roast, image } = newValues
     const { rows: [editedProduct] } = await db.query(`
       UPDATE products
-      SET name = $2, price = $3, description = $4, roast = $5, image = $6 
+      SET name = $2, price = $3, description = $4, roast = $5, image = $6
       WHERE id = $1
       RETURNING *`, [id, name, price, description, roast, image]);
     return editedProduct
   } catch (err) {
     throw err;
-  }    
+  }
 }
 
 
@@ -58,7 +58,7 @@ try{
     WHERE id = $1`, [productId])
     } catch (err) {
     throw err;
-  }    
+  }
 }
 
 
