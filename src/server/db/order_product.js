@@ -6,7 +6,7 @@ const db = require('./client')
 
 const addProduct = async ({ orderId, productId, quantity }) => {
     try{
-        const { row: [cart ] } = await db.query(`
+        const { row: cart } = await db.query(`
         INSERT INTO order_product ("orderId", "productId", quantity)
         VALUES($1, $2, $3)
         RETURNING *`, [orderId, productId, quantity]);

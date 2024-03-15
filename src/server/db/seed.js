@@ -125,7 +125,7 @@ const orders = [
   }
 ]
 
-const orders_products = [
+const carts = [
   {
     orderId: '1',
     productId:  '3',
@@ -168,7 +168,7 @@ const dropTables = async () => {
       `)
 
       await db.query(`
-      DROP TABLE IF EXISTS orders_products;
+      DROP TABLE IF EXISTS order_product;
       `)
   }
   catch(err) {
@@ -205,7 +205,7 @@ const createTables = async () => {
       )`)
 
       await db.query(`
-        CREATE TABLE orders_products(
+        CREATE TABLE order_product(
           id SERIAL PRIMARY KEY,
           "orderId" TEXT,
           "productId" TEXT,
@@ -251,7 +251,7 @@ const insertOrders = async () => {
   }
 };
 
-const insertCart = async () => {
+const insertOrderProduct = async () => {
   try {
     for (const cart of carts) {
       await addProduct({orderId: cart.orderId, productId: cart.productId, quantity: cart.quantity});
@@ -272,7 +272,7 @@ const seedDatabse = async () => {
         await insertUsers();
         await insertProducts();
         await insertOrders();
-        await insertCart() 
+        await insertOrderProduct() 
     }
     catch (err) {
         throw err;

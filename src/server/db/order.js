@@ -3,12 +3,12 @@ const db = require('./client')
 // -create neworder, -getorder function,
 // updateorders (patch: shipping-address, status),
 
-const createOrder = async ({ userId }) => {
+const createOrder = async ({ userId, address, status }) => {
     try{
       const { rows: [ order ] } = await db.query(`
-        INSERT INTO orders("userId", status)
-        VALUES ($1, $2)
-        RETURNING *`, [ userId, true ]);
+        INSERT INTO orders("userId", address, status)
+        VALUES ($1, $2, $3)
+        RETURNING *`, [ userId, address, status ]);
         return order;
     } catch (err) {
         throw err;
