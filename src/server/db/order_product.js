@@ -7,7 +7,7 @@ const db = require('./client')
 const addProduct = async ({ orderId, productId, quantity }) => {
     try{
         const { row: [cart ] } = await db.query(`
-        SELECT * FROM productId;
+        INSERT INTO order_product (orderId, productId, quantity)
         VALUES($1, $2, $3)
         RETURNING *`, [orderId, productId, quantity]);
         return cart
@@ -21,7 +21,7 @@ const deleteCartSingle = async ({ orderId, productId }) => {
     try{
         const { row } = await db.query(`
         DELETE FROM order_product
-        WHERE id = $1, productId = $2`, [ orderId, productId])
+        WHERE id = $1 AND productId = $2`, [ orderId, productId])
     } catch (err){
         throw err;
     }
@@ -42,7 +42,7 @@ const updateQuantity = async ({ orderId, productId, quantity }) => {
         const { row } = await db.query(`
         UPDATE order_product
         SET quantity = $3
-        WHERE id = $1, productId = $2
+        WHERE id = $1 AND productId = $2
         RETURNING *
         `, [ orderId, productId, quantity ])
         return row
