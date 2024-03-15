@@ -1,6 +1,8 @@
 const db = require('./client');
 const { createUser } = require('./users');
 const { createProduct } = require('./product')
+const { createOrder } = require( './order' )
+const { addProduct } = require( './order_product' )
 
 const users = [
   {
@@ -105,6 +107,52 @@ const products = [
   
 ]
 
+const orders = [
+  {
+    userId: "1",
+    address: "123 sesame street, USA",
+    status: true
+  },
+  {
+    userId: "2",
+    address: "456 cinnamon street, Canada",
+    status: false
+  },
+  {
+    userId: "3",
+    address: "789 vanilla street, Australia",
+    status: true
+  }
+]
+
+const orders_products = [
+  {
+    orderId: '1',
+    productId:  '3',
+    quantity: '1'  
+  },
+  {
+    orderId: '1',
+    productId:  '4',
+    quantity: '1'  
+  },
+  {
+    orderId: '2',
+    productId:  '5',
+    quantity: '2'  
+  },
+  {
+    orderId: '3',
+    productId:  '6',
+    quantity: '1'  
+  },
+  {
+    orderId: '3',
+    productId:  '1',
+    quantity: '1'  
+  }
+]
+
 const dropTables = async () => {
   try {
       await db.query(`
@@ -114,24 +162,20 @@ const dropTables = async () => {
       await db.query(`
       DROP TABLE IF EXISTS products;
       `)
+
+      await db.query(`
+      DROP TABLE IF EXISTS orders;
+      `)
+
+      await db.query(`
+      DROP TABLE IF EXISTS orders_products;
+      `)
   }
   catch(err) {
       throw err;
   }
 }
-
-
-// const dropTableProducts = async () => {
-//   try {
-//       await db.query(`
-//       DROP TABLE IF EXISTS Products;
-//       `)
-//   }
-//   catch(err) {
-//       throw err;
-//   }
-// }
-
+ 
 const createTables = async () => {
     try{
         await db.query(`
@@ -151,29 +195,29 @@ const createTables = async () => {
           roast TEXT,
           image TEXT
       )`)
+
+      await db.query(`
+        CREATE TABLE orders(
+          id SERIAL PRIMARY KEY,
+          "userId" TEXT,
+          address TEXT,
+          status BOOLEAN
+      )`)
+
+      await db.query(`
+        CREATE TABLE orders_products(
+          id SERIAL PRIMARY KEY,
+          "orderId" TEXT,
+          "productId" TEXT,
+          quantity TEXT
+      )`)
+
     }
     catch(err) {
         throw err;
     }
 }
-
-// const createTablesProducts = async () => {
-//   try{
-//       await db.query(`
-//       CREATE TABLE products(
-//           id SERIAL PRIMARY KEY,
-//           name TEXT,
-//           price DECIMAL,
-//           description TEXT,
-//           roast TEXT,
-//           "imageUrl" TEXT
-//       )`)
-//   }
-//   catch(err) {
-//       throw err;
-//   }
-// }
-
+ 
 const insertUsers = async () => {
   try {
     for (const user of users) {
@@ -196,6 +240,28 @@ const insertProducts = async () => {
   }
 };
 
+const insertOrders = async () => {
+  try {
+    for (const order of orders) {
+      await createOrder({"userId": order.userId, address: order.address, status: order.status});
+    }
+    console.log('Seed data (orders) inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data:', error);
+  }
+};
+
+const insertCart = async () => {
+  try {
+    for (const cart of carts) {
+      await addProduct({orderId: cart.orderId, productId: cart.productId, quantity: cart.quantity});
+    }
+    console.log('Seed data (Cart) inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data:', error);
+  }
+};
+
 
 
 const seedDatabse = async () => {
@@ -205,6 +271,8 @@ const seedDatabse = async () => {
         await createTables();
         await insertUsers();
         await insertProducts();
+        await insertOrders();
+        await insertCart() 
     }
     catch (err) {
         throw err;

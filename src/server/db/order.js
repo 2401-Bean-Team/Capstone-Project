@@ -6,7 +6,7 @@ const db = require('./client')
 const createOrder = async ({ userId }) => {
     try{
       const { rows: [ order ] } = await db.query(`
-        INSERT INTO orders(userId, status)
+        INSERT INTO orders("userId", status)
         VALUES ($1, $2)
         RETURNING *`, [ userId, true ]);
         return order;
