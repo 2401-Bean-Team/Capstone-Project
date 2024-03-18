@@ -4,8 +4,7 @@ import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import { Route, Routes, NavLink } from 'react-router-dom'
 
-function App() {
-
+function App() { 
 
   return (
 < div className = 'App'>
@@ -19,7 +18,7 @@ function App() {
     <Routes>
 
       <Route path='/' element={<AllProducts />} />
-      <Route path='/:Name' element={<SingleProduct />} />
+      <Route path='/coffee/:productId' element={<SingleProduct />} />
 
     </Routes>
 </div>

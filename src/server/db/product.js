@@ -28,7 +28,7 @@ const getProductById = async (productId) => {
 try{
     const { rows: [row] } = await db.query(`
     SELECT * FROM products
-    WHERE productId = $1`, [productId]);
+    WHERE id = $1`, [productId]);
     return row;
 } catch (err) {
    throw err;
