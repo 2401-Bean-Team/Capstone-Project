@@ -5,7 +5,7 @@ import axios from 'axios'
 function SingleProduct() {
 
 const params = useParams()
-const productName = params.product
+const productName = params.productId
 
 const [product, setProduct] = useState({})
 const [error, setError] = useState('')
@@ -13,11 +13,13 @@ const [error, setError] = useState('')
   useEffect(() => {
     async function fetchSingleProduct() {
       try {
-        const { data } = await axios.get(`/api/coffee/${productName}`)
+
+        const { data } = await axios.get(`/api/products/${productName}`)
         setProduct(data)
+
       } catch (err) {
         setError('No product found with that name!, ' + productName)
-      } 
+      }
     }
     fetchSingleProduct()
   },[])
