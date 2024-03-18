@@ -1,20 +1,28 @@
-import { useState } from 'react'; 
+import { useState } from 'react';
 import Login from './components/Login';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
-import { Route, Routes} from 'react-router-dom'
+import { Route, Routes, NavLink } from 'react-router-dom'
 
 function App() {
-    
+
 
   return (
+<>
+<header>
+        <h1>Coding Coffee</h1>
+        <nav>
+          <NavLink to='/'>Products</NavLink>
+
+        </nav>
+      </header>
     <Routes>
-    <div className='App'> 
-       
-      <Route path='/' element={<AllProducts />} /> 
-      <Route path='/products/:productId' element={<SingleProduct />} /> 
-    </div>
+
+      <Route path='/' element={<AllProducts />} />
+      <Route path='/products/:productId' element={<SingleProduct />} />
+
     </Routes>
+</>
   );
 }
 
