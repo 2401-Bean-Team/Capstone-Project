@@ -8,7 +8,7 @@ function App() {
 
 
   return (
-<>
+< div className = 'App'>
 <header>
         <h1>Coding Coffee</h1>
         <nav>
@@ -22,7 +22,7 @@ function App() {
       <Route path='/products/:productId' element={<SingleProduct />} />
 
     </Routes>
-</>
+</div>
   );
 }
 
