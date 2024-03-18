@@ -19,7 +19,7 @@ function App() {
     <Routes>
 
       <Route path='/' element={<AllProducts />} />
-      <Route path='/:Name' element={<SingleProduct />} />
+      <Route path='/:productId' element={<SingleProduct />} />
 
     </Routes>
 </div>
