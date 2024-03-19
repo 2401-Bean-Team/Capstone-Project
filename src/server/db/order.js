@@ -19,7 +19,7 @@ const getOrder = async ({ userId }) => {
     try{
       const { rows } = await db.query(`
         SELECT * FROM orders
-        WHERE userId=$1
+        WHERE "userId"=$1
         `, [ userId ]);
         return rows;
     } catch (err) {
