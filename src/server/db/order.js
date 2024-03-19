@@ -15,12 +15,12 @@ const createOrder = async ({ userId, address, status }) => {
       }
     }
 
-const getOrder = async ({ orderId }) => {
+const getOrder = async ({ userId }) => {
     try{
       const { rows } = await db.query(`
         SELECT * FROM orders
-        WHERE id=$1
-        `, [ orderId ]);
+        WHERE userId=$1
+        `, [ userId ]);
         return rows;
     } catch (err) {
         throw err;

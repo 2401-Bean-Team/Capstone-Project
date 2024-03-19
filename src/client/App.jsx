@@ -5,6 +5,7 @@ import SingleProduct from './components/SingleProduct';
 import { Route, Routes, NavLink } from 'react-router-dom'
 
 function App() { 
+  const [token, setToken] = useState(null) 
 
   return (
 < div className = 'App'>
@@ -19,7 +20,9 @@ function App() {
 
       <Route path='/' element={<AllProducts />} />
       <Route path='/coffee/:productId' element={<SingleProduct />} />
-
+      <Route path='/login' element={<Login setToken={setToken} />} /> 
+      <Route path='/account' element={<Account token={token} setToken={setToken}/>} />
+      <Route path='/register' element={<Register setToken={setToken} />} />
     </Routes>
 </div>
   );
