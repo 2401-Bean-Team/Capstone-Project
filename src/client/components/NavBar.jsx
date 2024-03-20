@@ -23,7 +23,7 @@ export default function NavBar() {
     </ul>
   </div>
 </nav>
-<h1 className='title'>CodingCoffee</h1>
+<img className='logo' src="https://pbs.twimg.com/media/GJInK2jboAAHHA3?format=jpg&name=small" alt="logo"></img>
 <h1 className='cartimg'>cart</h1>
 </div>
 
