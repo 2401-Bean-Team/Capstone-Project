@@ -2,7 +2,7 @@ const express = require('express');
 const apiRouter = express.Router();
 const jwt = require('jsonwebtoken');
 
-const { getUser } = require( '../db/users')
+const { getUserById } = require( '../db/users')
 const { JWT_SECRET } = process.env;
 
 const volleyball = require('volleyball')
@@ -22,10 +22,10 @@ apiRouter.use(async (req, res, next) => {
 
     try {
       const parsedToken = jwt.verify(token, JWT_SECRET);
-      const { id } = parsedToken
+      const { id } = parsedToken  
 
       if (id) {
-        req.user = await getUserById(id);
+        req.user = await getUserById({ id });
         next();
       } else {
         next({
@@ -51,6 +51,7 @@ const usersRouter = require('./users');
 apiRouter.use('/users', usersRouter);
 
 apiRouter.use((err, req, res, next) => {
+    console.error(err)
     res.status(500).send(err)
   })
 
@@ -63,5 +64,6 @@ apiRouter.use((err, req, res, next) => {
   apiRouter.use('/orders', require ('./orders'))
 
   apiRouter.use('/cart', require('./order_product'))
+ 
 
 module.exports = apiRouter;

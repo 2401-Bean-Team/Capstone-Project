@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react" 
 import axios from "axios"
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom"; 
 
 
 
-export default function Account({token, setToken}) {
+export default function Account({ token, setToken, email, password }) {
     const navigate = useNavigate()
     const [user, setUser] = useState(null)
-    const [error, setError] = useState(null)  
-    const userId = user.id
+    const [error, setError] = useState(null) 
     
     useEffect(() => {
         async function fetchData() {
-            try {
-                const userData = await getUser(token);
+            try { 
+                const userData = await getUser();
                 setUser(userData); 
             } catch (error) {
                 setError(error); 
@@ -21,9 +20,9 @@ export default function Account({token, setToken}) {
         }
 
         fetchData();
-    }, [token]);
+    }, [email, password]);
 
-    async function getUser(token) {
+    async function getUser(userId) {
         const { data } = await axios.get('/api/users/me', {
             headers: {
                 Authorization: 'Bearer ' + token
@@ -36,6 +35,26 @@ export default function Account({token, setToken}) {
         setToken(null) 
         navigate('/')
     } 
+
+    async function returnOrder(orderId, token) {
+        try {
+          // Make a request to return the order
+          await axios.post(
+            `/api/orders/return/${orderId}`,
+            {},
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          );
+          // Refetch user data after successful order return
+          const userData = await getUser(email, password);
+          setUser(userData);
+        } catch (error) {
+          console.error("Error returning order:", error);
+        }
+      }
 
     if (!user) {
         return <h1>Logged out, please <NavLink to='/login'>Login</NavLink> or <NavLink to='/register'>Register</NavLink></h1>
@@ -50,7 +69,7 @@ export default function Account({token, setToken}) {
                 <button onClick={logOut} >Log Out</button>
                 <h2>Your Orders: </h2>
                 <section className="orders-account-list"> 
-                {user.orders.length === 0 ? (
+                {!user.orders || user.orders.length === 0 ? (
                     <h4>No items in order</h4>
                 ) : (  
                     user.orders.map(order => (  
@@ -59,8 +78,7 @@ export default function Account({token, setToken}) {
                             <h5>{order.price}</h5>
                             <h5>{order.roast}</h5>
                             <img src={order.image} alt={order.name} /> 
-                            <p>{order.description}</p>
-                            <button onClick={()=> returnorder(order.id, token)} >Return order</button>
+                            <p>{order.description}</p> 
                         </article>   
                     )) 
                 )}
