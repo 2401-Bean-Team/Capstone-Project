@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate, NavLink } from "react-router-dom"
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login = ({ setToken, email, setEmail, password, setPassword }) => {
+  const navigate = useNavigate() 
   const [message, setMessage] = useState('');
 
   const handleEmailChange = (e) => {
@@ -27,8 +27,11 @@ const Login = () => {
         });
         const result = await response.json();
         setMessage(result.message);
-        if(!response.ok) {
-          throw(result)
+        if (response.ok) {
+          setToken(result.token); // Set the token upon successful login
+          navigate('/account'); // Redirect to the account page
+        } else {
+          throw result;
         }
         setEmail('');
         setPassword('');
