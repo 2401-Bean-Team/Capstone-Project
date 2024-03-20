@@ -18,8 +18,10 @@ export default function AllProducts() {
     console.log( coffee )
 
     return (
-        <div className="allCoffee">
-            <h1>Coffee:</h1>
+        <div >
+
+            <h1 className="allCoffeeCoffee">Coffee:</h1>
+            <div className="allCoffee">
             {coffee.map(c => (
                 <div key={c.id} className="coffee">
                     <Link to={`/coffee/${c.id}`}>
@@ -29,7 +31,10 @@ export default function AllProducts() {
                         <h2>{c.roast}</h2>
                     </Link>
                 </div>
+
             ))}
+            </div>
+
         </div>
     );
 }

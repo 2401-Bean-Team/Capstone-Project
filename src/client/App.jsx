@@ -5,25 +5,23 @@ import SingleProduct from './components/SingleProduct';
 import Account from './components/Account';
 import Register from './components/Register';
 import { Route, Routes, NavLink } from 'react-router-dom'
+import NavBar from './components/NavBar';
 
 
-function App() { 
-  const [token, setToken] = useState(null) 
+function App() {
+  const [token, setToken] = useState(null)
 
   return (
 < div className = 'App'>
 <header>
         <h1>Coding Coffee</h1>
-        <nav>
-          <NavLink to='/'>Products</NavLink>
-
-        </nav>
+        <NavBar className="navagation" />
       </header>
     <Routes>
 
       <Route path='/' element={<AllProducts />} />
       <Route path='/coffee/:productId' element={<SingleProduct />} />
-      <Route path='/login' element={<Login setToken={setToken} />} /> 
+      <Route path='/login' element={<Login setToken={setToken} />} />
       <Route path='/account' element={<Account token={token} setToken={setToken}/>} />
       <Route path='/register' element={<Register setToken={setToken} />} />
     </Routes>
