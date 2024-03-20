@@ -2,7 +2,10 @@ import { useState } from 'react';
 import Login from './components/Login';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
+import Account from './components/Account';
+import Register from './components/Register';
 import { Route, Routes, NavLink } from 'react-router-dom'
+
 
 function App() { 
   const [token, setToken] = useState(null) 
