@@ -6,7 +6,7 @@ const db = require('./client')
 
 const addProduct = async ({ orderId, productId, quantity }) => {
     try{
-        const { row: cart } = await db.query(`
+        const { rows: [cart] } = await db.query(`
         INSERT INTO order_product ("orderId", "productId", quantity)
         VALUES($1, $2, $3)
         RETURNING *`, [orderId, productId, quantity]);
@@ -21,7 +21,7 @@ const deleteCartSingle = async ({ orderId, productId }) => {
     try{
         const { row } = await db.query(`
         DELETE FROM order_product
-        WHERE id = $1 AND "productId" = $2`, [ orderId, productId])
+        WHERE "orderId" = $1 AND "productId" = $2`, [ orderId, productId])
     } catch (err){
         throw err;
     }
@@ -31,7 +31,7 @@ const deleteCart = async ({ orderId }) => {
     try{
         const { row } = await db.query(`
         DELETE FROM order_product
-        WHERE id = $1`, [ orderId ])
+        WHERE "orderId" = $1`, [ orderId ])
     } catch (err){
         throw (err)
     }
@@ -39,13 +39,13 @@ const deleteCart = async ({ orderId }) => {
 
 const updateQuantity = async ({ orderId, productId, quantity }) => {
     try{
-        const { row } = await db.query(`
+        const { rows } = await db.query(`
         UPDATE order_product
         SET quantity = $3
-        WHERE id = $1 AND "productId" = $2
+        WHERE "orderId" = $1 AND "productId" = $2
         RETURNING *
         `, [ orderId, productId, quantity ])
-        return row
+        return rows[0];
 
     }catch (err){
         throw err;
