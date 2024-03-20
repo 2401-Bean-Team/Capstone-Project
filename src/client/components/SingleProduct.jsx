@@ -14,7 +14,7 @@ function SingleProduct() {
             try {
                 const { data } = await axios.get(`/api/products/${productId}`);
                 setProduct(data);
-                 
+
             } catch (err) {
                 setError('No product found with that Id!, ' + productId);
             } finally {
@@ -23,7 +23,7 @@ function SingleProduct() {
         }
         fetchSingleProduct();
     }, [productId]);
-     
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -38,7 +38,7 @@ function SingleProduct() {
             <h3>{product.description}</h3>
             <h3>{product.price}</h3>
             <h3>{product.roast}</h3>
-            <img src={product.imageUrl} alt={product.name} />
+            <img src={product.image} alt={product.name} />
         </div>
     );
 }
