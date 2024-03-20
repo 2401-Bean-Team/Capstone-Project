@@ -15,12 +15,12 @@ const createOrder = async ({ userId, address, status }) => {
       }
     }
 
-const getOrder = async ({ userId }) => {
+const getOrder = async ({ orderId }) => {
     try{
       const { rows } = await db.query(`
         SELECT * FROM orders
-        WHERE "userId"=$1
-        `, [ userId ]);
+        WHERE id=$1
+        `, [ orderId ]);
         return rows;
     } catch (err) {
         throw err;
@@ -31,10 +31,10 @@ const updateAddress = async (orderId, address) => {
     try{
         const { rows } = await db.query(`
         UPDATE orders
-        SET address=$2
-        WHERE  id= $1
+        SET address = $2
+        WHERE  id = $1
         RETURNING *
-        `, [ orderId, address ]);
+        `, [orderId, address]);
         return rows;
     } catch (err) {
         throw err;

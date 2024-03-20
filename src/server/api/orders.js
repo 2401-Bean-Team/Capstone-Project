@@ -29,17 +29,17 @@ orderRouter.get('/:userId', async (req, res, next) => {
     }
   })
 
-  orderRouter.put('/:id/address', async (req, res, next) => {
+  orderRouter.put('/:orderId/changeAddress', async (req, res, next) => {
     try {
-        const userId = req.params.id; 
+        const orderId = req.params.orderId; 
         const {  address } = req.body;
 
-        const order = await getOrder(userId)
-        if (order) {
-            let updatedOrder = await updateAddress({
-                userId,
-                address: address, 
-            })
+        const order = await getOrder({ orderId });
+        if (order.length > 0) {
+            let updatedOrder = await updateAddress(
+                orderId,
+                address
+            )
             res.send(updatedOrder)
         } else {
             res.status(404).send(`No order found with userId: ${userId}`)
@@ -49,17 +49,17 @@ orderRouter.get('/:userId', async (req, res, next) => {
     }
   })
 
-  orderRouter.put('/:id/status', async (req, res, next) => {
+  orderRouter.put('/:orderId/changeStatus', async (req, res, next) => {
     try {
-        const userId = req.params.id;  
+        const orderId = req.params.orderId; 
         const {  status } = req.body;
 
-        const order = await getOrder(userId)
-        if (order) {
-            let updatedOrder = await updateStatus({
-                userId, 
-                status: status
-            })
+        const order = await getOrder({ orderId });
+        if (order.length > 0) {
+            let updatedOrder = await updateStatus(
+                orderId,
+                status
+            )
             res.send(updatedOrder)
         } else {
             res.status(404).send(`No order found with userId: ${userId}`)
