@@ -10,6 +10,8 @@ import NavBar from './components/NavBar';
 
 function App() {
   const [token, setToken] = useState(null)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
 < div className = 'App'>
@@ -21,8 +23,8 @@ function App() {
 
       <Route path='/' element={<AllProducts />} />
       <Route path='/coffee/:productId' element={<SingleProduct />} />
-      <Route path='/login' element={<Login setToken={setToken} />} />
-      <Route path='/account' element={<Account token={token} setToken={setToken}/>} />
+      <Route path='/login' element={<Login setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
+      <Route path='/account' element={<Account token={token} setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
       <Route path='/register' element={<Register setToken={setToken} />} />
     </Routes>
 </div>

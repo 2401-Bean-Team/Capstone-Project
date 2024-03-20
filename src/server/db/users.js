@@ -50,8 +50,25 @@ const getUserByEmail = async(email) => {
     }
 }
 
+const getUserById = async(userId) => {
+    try {
+        const { rows: [ user ] } = await db.query(`
+        SELECT * 
+        FROM users
+        WHERE password = $1;`, [ userId ]);
+
+        if(!user) {
+            return;
+        }
+        return user;
+    } catch (err) {
+        throw err;
+    }
+}
+
 module.exports = {
     createUser,
     getUser,
-    getUserByEmail
+    getUserByEmail,
+    getUserById
 };
