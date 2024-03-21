@@ -7,6 +7,7 @@ import Register from './components/Register';
 import { Route, Routes, NavLink } from 'react-router-dom'
 import NavBar from './components/NavBar';
 import AdminLogin from './components/AdminLogin';
+import ShoppingCart from './components/Cart';
 
 
 function App() {
