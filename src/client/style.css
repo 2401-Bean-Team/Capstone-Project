@@ -28,7 +28,7 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
   border-radius:50%;
 }
 .NAVBAR {
-  background-color: #38220f;
+  background-color:#110e0b;
   grid-template-columns: 15% [col-start] 70% [col-start] 15% [col-start];
 }
 
@@ -122,7 +122,7 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
 {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+  background: #c79e8e;
 }
 
 /*
@@ -181,7 +181,7 @@ ALLPRODUCTS CSS */
   justify-content: center;
   flex-wrap: wrap;
  padding: 10px;
- background-color: #634832;
+ background-color: #8a7e74;
  padding: 2px;
   border-radius: 25px;
   border: 4px ridge rgb(238, 213, 170);
