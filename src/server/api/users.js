@@ -5,7 +5,7 @@ const {
     createUser,
     getUser,
     getUserByEmail,
-    getUserById
+    getUserById,
 } = require('../db/users');
 
 const jwt = require('jsonwebtoken')
@@ -55,6 +55,7 @@ usersRouter.post('/login', async(req, res, next) => {
         next(err);
     }
 });
+
 
 usersRouter.post('/register', async(req, res, next) => {
     const { name, email, password } = req.body;

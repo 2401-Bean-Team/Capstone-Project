@@ -17,6 +17,20 @@ const createUser = async({ name='first last', email, password }) => {
     }
 }
 
+const createAdminUser = async({ name='first last', password }) => {
+    const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
+    try {
+        const { rows: [adminUsers ] } = await db.query(`
+        INSERT INTO adminUsers(name, password)
+        VALUES($1, $2)
+        RETURNING *`, [name, hashedPassword]);
+
+        return adminUsers;
+    } catch (err) {
+        throw err;
+    }
+}
+
 const getUser = async({email, password}) => {
     if(!email || !password) {
         return;
@@ -29,6 +43,23 @@ const getUser = async({email, password}) => {
         if(!passwordsMatch) return;
         delete user.password;
         return user;
+    } catch (err) {
+        throw err;
+    }
+}
+
+const getAdminUser = async({name, password}) => {
+    if(!name || !password) {
+        return;
+    }
+    try {
+        const adminUser = await getAdminUserByName(name);
+        if(!adminUser) return;
+        const hashedPassword = adminUser.password;
+        const passwordsMatch = await bcrypt.compare(password, hashedPassword);
+        if(!passwordsMatch) return;
+        delete adminUser.password;
+        return adminUser;
     } catch (err) {
         throw err;
     }
@@ -66,9 +97,45 @@ const getUserById = async(userId) => {
     }
 }
 
+const getAdminUserById = async(adminUserId) => {
+    try {
+        const { rows: [ adminUser ] } = await db.query(`
+        SELECT * 
+        FROM adminUsers
+        WHERE password = $1;`, [ adminUserId ]);
+
+        if(!adminUser) {
+            return;
+        }
+        return adminUser;
+    } catch (err) {
+        throw err;
+    }
+}
+
+const getAdminUserByName = async(name) => {
+    try {
+        const { rows: [ adminUser ] } = await db.query(`
+        SELECT * 
+        FROM adminUsers
+        WHERE name=$1;`, [ name ]);
+
+        if(!adminUser) {
+            return;
+        }
+        return adminUser;
+    } catch (err) {
+        throw err;
+    }
+}
+
 module.exports = {
     createUser,
     getUser,
     getUserByEmail,
-    getUserById
+    getUserById,
+    createAdminUser,
+    getAdminUserById,
+    getAdminUserByName,
+    getAdminUser
 };
