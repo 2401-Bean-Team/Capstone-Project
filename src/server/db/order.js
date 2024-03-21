@@ -15,11 +15,12 @@ const createOrder = async ({ userId, address, status }) => {
       }
     }
 
-const getOrder = async ({ orderId }) => {
+    //gets active orders(not checked out)
+const getOrder = async ({ orderId }) => { 
     try{
       const { rows } = await db.query(`
         SELECT * FROM orders
-        WHERE id=$1
+        WHERE id=$1  AND status= true 
         `, [ orderId ]);
         return rows;
     } catch (err) {
