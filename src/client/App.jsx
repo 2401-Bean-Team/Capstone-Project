@@ -31,6 +31,7 @@ function App() {
       <Route path='/register' element={<Register setToken={setToken} />} />
       <Route path='/cart' element={<Register token={token} />} />
       <Route path='/admin' element={<AdminLogin setToken={setToken} name={name} setName={setName} password={password} setPassword={setPassword} />} />
+      <Route path='/cart' element={<ShoppingCart token={token} email={email} />} />
     </Routes>
 
     <footer>
