@@ -34,11 +34,17 @@ function SingleProduct() {
 
     return (
         <div className='single-product-container'>
-            <h1>{product.name}</h1>
-            <h3>{product.description}</h3>
-            <h3>{product.price}</h3>
-            <h3>{product.roast}</h3>
             <img src={product.image} alt={product.name} />
+            <h3 className="sinWord"><h1 className="sinName">{product.name}</h1>
+            <br></br> {product.roast}
+            <br></br>
+            <br></br> {product.description}
+            <br></br>
+            <br></br> {product.price}
+            </h3>
+            <h1>*Currently Only Avalible in Unground</h1>
+
+            <button className="addcartbutton" type="button">Click Me!</button>
         </div>
     );
 }

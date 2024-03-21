@@ -6,7 +6,7 @@ import Account from './components/Account';
 import Register from './components/Register';
 import { Route, Routes, NavLink } from 'react-router-dom'
 import NavBar from './components/NavBar';
-
+import Footer from './components/Footer';
 
 function App() {
   const [token, setToken] = useState(null)
@@ -27,6 +27,10 @@ function App() {
       <Route path='/account' element={<Account token={token} setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
       <Route path='/register' element={<Register setToken={setToken} />} />
     </Routes>
+
+    <footer>
+      <Footer className="foot" />
+    </footer>
 </div>
   );
 }
