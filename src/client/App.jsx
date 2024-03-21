@@ -6,11 +6,13 @@ import Account from './components/Account';
 import Register from './components/Register';
 import { Route, Routes, NavLink } from 'react-router-dom'
 import NavBar from './components/NavBar';
+import AdminLogin from './components/AdminLogin';
 
 
 function App() {
   const [token, setToken] = useState(null)
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
   return (
@@ -26,6 +28,7 @@ function App() {
       <Route path='/login' element={<Login setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
       <Route path='/account' element={<Account token={token} setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
       <Route path='/register' element={<Register setToken={setToken} />} />
+      <Route path='/admin' element={<AdminLogin setToken={setToken} name={name} setName={setName} password={password} setPassword={setPassword} />} />
     </Routes>
 </div>
   );

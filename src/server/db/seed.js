@@ -1,5 +1,6 @@
 const db = require('./client');
 const { createUser } = require('./users');
+const { createAdminUser } = require('./users');
 const { createProduct } = require('./product')
 const { createOrder } = require( './order' )
 const { addProduct } = require( './order_product' )
@@ -31,6 +32,13 @@ const users = [
     password: 'password123',
   },
   // Add more user objects as needed
+];
+
+const adminUsers = [
+  {
+    name: 'Admin User',
+    password: 'beans',
+  },
 ];
 
 const products = [
@@ -170,6 +178,9 @@ const dropTables = async () => {
       await db.query(`
       DROP TABLE IF EXISTS order_product;
       `)
+      await db.query(`
+      DROP TABLE IF EXISTS adminUsers;
+      `)
   }
   catch(err) {
       throw err;
@@ -183,6 +194,12 @@ const createTables = async () => {
             id SERIAL PRIMARY KEY,
             name VARCHAR(255) DEFAULT 'name',
             email VARCHAR(255) UNIQUE NOT NULL,
+            password VARCHAR(255) NOT NULL
+        )`)
+        await db.query(`
+        CREATE TABLE adminUsers(
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) DEFAULT 'name',
             password VARCHAR(255) NOT NULL
         )`)
 
@@ -224,6 +241,17 @@ const insertUsers = async () => {
       await createUser({name: user.name, email: user.email, password: user.password});
     }
     console.log('Seed data inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data:', error);
+  }
+};
+
+const insertAdminUser = async () => {
+  try {
+    for (const adminUser of adminUsers) {
+      await createAdminUser({name: adminUser.name, password: adminUser.password});
+    }
+    console.log('Seed data (Admin Users) inserted successfully.');
   } catch (error) {
     console.error('Error inserting seed data:', error);
   }
@@ -272,7 +300,8 @@ const seedDatabse = async () => {
         await insertUsers();
         await insertProducts();
         await insertOrders();
-        await insertOrderProduct()
+        await insertOrderProduct();
+        await insertAdminUser();
     }
     catch (err) {
         throw err;

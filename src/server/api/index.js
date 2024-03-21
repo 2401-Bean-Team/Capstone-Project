@@ -49,6 +49,9 @@ apiRouter.use(async (req, res, next) => {
 const usersRouter = require('./users');
 apiRouter.use('/users', usersRouter);
 
+const adminUserRouter = require('./adminUser');
+apiRouter.use('/adminUser', adminUserRouter);
+
 apiRouter.use((err, req, res, next) => {
     console.error(err)
     res.status(500).send(err)
@@ -66,3 +69,4 @@ apiRouter.use((err, req, res, next) => {
  
 
 module.exports = apiRouter;
+
