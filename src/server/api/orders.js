@@ -5,10 +5,10 @@ const { createOrder, getOrder, updateAddress, updateStatus } = require('../db/or
 
 // /api/orders
 
-orderRouter.get('/:userId', async (req, res, next) => {
+orderRouter.get('/myCart', async (req, res, next) => {
     try {
-        const userId = req.params.userId
-      const order = await getOrder({ userId });
+        const userId = req.user.id
+      const order = await getCart({ userId });
       res.send(order);
     } catch(err) {
       next(err);

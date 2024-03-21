@@ -16,7 +16,7 @@ const createOrder = async ({ userId, address, status }) => {
     }
 
     //gets active orders(not checked out)
-const getOrder = async ({ orderId }) => { 
+const getCart = async ({ orderId }) => { 
     try{
       const { rows } = await db.query(`
         SELECT * FROM orders
@@ -58,7 +58,7 @@ const updateStatus = async (orderId, status) => {
 
 module.exports = {
 createOrder,
-getOrder,
+getCart,
 updateAddress,
 updateStatus
 }

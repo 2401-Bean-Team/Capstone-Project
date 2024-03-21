@@ -28,6 +28,7 @@ function App() {
       <Route path='/login' element={<Login setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
       <Route path='/account' element={<Account token={token} setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
       <Route path='/register' element={<Register setToken={setToken} />} />
+      <Route path='/cart' element={<Register token={token} />} />
       <Route path='/admin' element={<AdminLogin setToken={setToken} name={name} setName={setName} password={password} setPassword={setPassword} />} />
     </Routes>
 </div>
