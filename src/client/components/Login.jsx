@@ -1,44 +1,46 @@
 import React, { useState } from 'react';
-import { useNavigate, NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ setToken, email, setEmail, password, setPassword }) => {
-  const navigate = useNavigate() 
+const Login = ({ setToken, setEmail, email }) => {
+  const navigate = useNavigate();  
+  const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
   const handleEmailChange = (e) => {
+    console.log("Email before setting:", email); // Log before setting
     setEmail(e.target.value);
+    console.log("Email after setting:", e.target.value);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const login = async() => {
+  const login = async () => {
     try {
-        const response = await fetch('/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json'
-            }, 
-            body: JSON.stringify({
-                email,
-                password
-            })
-        });
-        const result = await response.json();
-        setMessage(result.message);
-        if (response.ok) {
-          setToken(result.token); // Set the token upon successful login
-          navigate('/account'); // Redirect to the account page
-        } else {
-          throw result;
-        }
-        setEmail('');
-        setPassword('');
+      const response = await fetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+      const result = await response.json();
+      setMessage(result.message);
+      if (response.ok) {
+        setToken(result.token); // Set the token upon successful login
+        //navigate('/account'); // Redirect to the account page
+      } else {
+        throw result;
+      } 
+      setPassword('');
     } catch (err) {
-        console.error(`${err.name}: ${err.message}`);
+      console.error(`${err.name}: ${err.message}`);
     }
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

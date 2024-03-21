@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react" 
 import axios from "axios"
-import { useNavigate, NavLink } from "react-router-dom"; 
+import { useNavigate, NavLink } from "react-router-dom";  
 
 
 
@@ -12,7 +12,8 @@ export default function Account({ token, setToken, email, password }) {
     useEffect(() => {
         async function fetchData() {
             try { 
-                const userData = await getUser();
+                const userData = await getUser(email);
+                console.log('userdata: ', userData)
                 setUser(userData); 
             } catch (error) {
                 setError(error); 
@@ -20,15 +21,16 @@ export default function Account({ token, setToken, email, password }) {
         }
 
         fetchData();
-    }, [email, password]);
+    }, [email]);
 
-    async function getUser(userId) {
-        const { data } = await axios.get('/api/users/me', {
-            headers: {
-                Authorization: 'Bearer ' + token
-            }
-        })
-        return data
+    async function getUser(email, token) {
+        try {
+            const { data } = await axios.get(`/api/users/me?email=${email}`);
+            console.log('data: ', data);
+            return data;
+        } catch (error) {
+            setError(error);
+        }
     }
  
     function logOut() {
@@ -63,26 +65,11 @@ export default function Account({ token, setToken, email, password }) {
         <>
               
             <main className="account" >
-                <h1>Account details</h1>
-                <h3>{user.name}</h3>
-                <h4>{user.email}</h4>
+                <h1>Account details: </h1>
+                <h3>{user.user.name}</h3>
+                <h4>{user.user.email}</h4>
                 <button onClick={logOut} >Log Out</button>
-                <h2>Your Orders: </h2>
-                <section className="orders-account-list"> 
-                {!user.orders || user.orders.length === 0 ? (
-                    <h4>No items in order</h4>
-                ) : (  
-                    user.orders.map(order => (  
-                        <article key={order.id} className="order-item-card">
-                            <h4>{order.name}</h4>
-                            <h5>{order.price}</h5>
-                            <h5>{order.roast}</h5>
-                            <img src={order.image} alt={order.name} /> 
-                            <p>{order.description}</p> 
-                        </article>   
-                    )) 
-                )}
-                </section>
+                 
             </main>
         </> 
     )  

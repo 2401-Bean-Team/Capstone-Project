@@ -6,7 +6,7 @@ const {
     getUser,
     getUserByEmail,
     getUserById
-} = require('../db');
+} = require('../db/users');
 
 const jwt = require('jsonwebtoken')
 
@@ -91,21 +91,16 @@ usersRouter.post('/register', async(req, res, next) => {
     }
 })
 
-usersRouter.get('/me', async( req, res, next) => {
+usersRouter.get('/me', async (req, res, next) => {
     try {
-        const token = req.headers.authorization.split(' ')[1];
+        const email = req.query.email; // Access email from query parameters
 
-        // Verify the token to get the user's ID
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        const userId = decodedToken.id;
-
-        // Use the userId to fetch the user data
-        const user = await getUserById(userId);
+        const user = await getUserByEmail(email);
 
         // Respond with the user data
         res.send({ user });
-    } catch ({name, message}) {
-        next({name, message})
+    } catch (error) {
+        next(error);
     }
 });
 
