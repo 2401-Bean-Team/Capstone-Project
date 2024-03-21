@@ -8,7 +8,7 @@ import { Route, Routes, NavLink } from 'react-router-dom'
 import NavBar from './components/NavBar';
 import AdminLogin from './components/AdminLogin';
 import ShoppingCart from './components/Cart';
-
+import Footer from './components/Footer';
 
 function App() {
   const [token, setToken] = useState(null)
@@ -32,6 +32,10 @@ function App() {
       <Route path='/cart' element={<Register token={token} />} />
       <Route path='/admin' element={<AdminLogin setToken={setToken} name={name} setName={setName} password={password} setPassword={setPassword} />} />
     </Routes>
+
+    <footer>
+      <Footer className="foot" />
+    </footer>
 </div>
   );
 }
