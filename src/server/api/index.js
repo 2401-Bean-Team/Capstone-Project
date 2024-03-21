@@ -21,10 +21,13 @@ apiRouter.use(async (req, res, next) => {
 
     try {
       const parsedToken = jwt.verify(token, JWT_SECRET);
-      const { id } = parsedToken  
+      const { id } = parsedToken 
+      console.log('parsed token: ', parsedToken) 
+      console.log('user id:', id);
 
       if (id) {
         req.user = await getUserById({ id });
+        console.log('req.user:', req.user);
         next();
       } else {
         next({
@@ -60,9 +63,9 @@ apiRouter.use((err, req, res, next) => {
 
   apiRouter.use('/products', require('./products'))
 
-  apiRouter.use('/orders', require ('./orders'))
+  apiRouter.use('/cart', require ('./orders'))
 
-  apiRouter.use('/cart', require('./order_product'))
+  apiRouter.use('/order_product', require('./order_product'))
  
 
 module.exports = apiRouter;

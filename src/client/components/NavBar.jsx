@@ -23,6 +23,7 @@ export default function NavBar() {
       <Link className='navLogin' to="/login"><li>Login</li></Link>
       <Link  className='navAccount' to="/account"><li>Account</li></Link>
       <Link  className='navRegister' to="/register"><li>Sign Up</li></Link>
+      <Link  className='navCart' to="/cart"><li>Cart</li></Link>
     </ul>
   </div>
 </nav>

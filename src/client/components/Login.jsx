@@ -29,10 +29,11 @@ const Login = ({ setToken, setEmail, email }) => {
         })
       });
       const result = await response.json();
+      console.log('token : ', result.token)
       setMessage(result.message);
       if (response.ok) {
         setToken(result.token); // Set the token upon successful login
-        //navigate('/account'); // Redirect to the account page
+        //navigate('/cart'); // Redirect to the account page
       } else {
         throw result;
       } 

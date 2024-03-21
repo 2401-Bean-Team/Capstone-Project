@@ -1,9 +1,22 @@
 const express = require('express');
 const orderRouter = express.Router();
 
-const { createOrder, getOrder, updateAddress, updateStatus } = require('../db/order')
+const { createOrder, getCart, updateAddress, updateStatus } = require('../db/order')
 
 // /api/orders
+// Middleware for requiring a valid token
+const requireToken = (req, res, next) => {
+    // Check if token is present in the request header or wherever you store your tokens
+    const token = req.headers.authorization;
+    if (!token) {
+        return res.status(401).send("Unauthorized: Token is required");
+    }
+    // You may add further token validation logic here
+    next(); // Move to the next middleware or route handler
+};
+
+// Apply requireToken middleware to relevant routes
+orderRouter.use(requireToken);
 
 orderRouter.get('/myCart', async (req, res, next) => {
     try {
