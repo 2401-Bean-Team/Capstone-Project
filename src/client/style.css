@@ -28,6 +28,21 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
   border-radius:50%;
   grid-column-start: col-start 2;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .NAVBAR {
   background-color: #c8752294;
   display: grid;
@@ -183,6 +198,7 @@ ALLPRODUCTS CSS */
   justify-content: center;
   flex-wrap: wrap;
  padding: 10px;
+
  background-color: #38220f;
  padding: 2px;
   border-radius: 25px;
