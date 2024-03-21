@@ -28,8 +28,7 @@ function App() {
       <Route path='/coffee/:productId' element={<SingleProduct />} />
       <Route path='/login' element={<Login setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
       <Route path='/account' element={<Account token={token} setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
-      <Route path='/register' element={<Register setToken={setToken} />} />
-      <Route path='/cart' element={<Register token={token} />} />
+      <Route path='/register' element={<Register setToken={setToken} />} /> 
       <Route path='/admin' element={<AdminLogin setToken={setToken} name={name} setName={setName} password={password} setPassword={setPassword} />} />
       <Route path='/cart' element={<ShoppingCart token={token} email={email} />} />
     </Routes>
