@@ -49,11 +49,11 @@ const requireToken = (req, res, next) => {
 
   });
 
-  adminPageRouter.delete('/deleteproduct', async (req, res, next) => {
+  adminPageRouter.delete('/deleteproduct/:productId', async (req, res, next) => {
     try {
-      const deleteProductData = req.body;
-      const deleteProduct = await deleteProduct(deleteProductData) 
-      res.send(deleteProduct);       
+      const productId = req.params.productId;
+      await deleteProduct(productId) 
+      res.send("Product deleted successfully");       
     } catch (err) {
         next(err);
     }
