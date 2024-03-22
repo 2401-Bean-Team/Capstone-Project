@@ -16,12 +16,12 @@ const createOrder = async ({ userId, address, status }) => {
     }
 
     //gets active orders(not checked out)
-const getCart = async ({ orderId }) => { 
+const getCart = async ({ userId }) => { 
     try{
       const { rows } = await db.query(`
         SELECT * FROM orders
-        WHERE id=$1  AND status= true 
-        `, [ orderId ]);
+        WHERE "userId" = $1  AND status= true 
+        `, [ userId ]);
         return rows;
     } catch (err) {
         throw err;
