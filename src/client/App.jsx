@@ -32,7 +32,7 @@ function App() {
       <Route path='/register' element={<Register setToken={setToken} />} /> 
       <Route path='/admin' element={<AdminLogin setToken={setToken} name={name} setName={setName} password={password} setPassword={setPassword} />} />
       <Route path='/cart' element={<ShoppingCart token={token} email={email} />} />
-      <Route path='/adminpage' element={<Adminpage setToken={setToken} setName={setName} name={name} setPassword={setPassword} />} />
+      <Route path='/adminpage' element={<Adminpage token={token} setName={setName} name={name} setPassword={setPassword} />} />
 
     </Routes>
 
