@@ -61,7 +61,7 @@ const requireToken = (req, res, next) => {
 
   adminPageRouter.put('/editproduct', async (req, res, next) => {
     try {
-      const editProductData = req.body
+      const editProductData = req.
       const editProduct = await editProduct(editProductData);
       res.send(editProduct)  
     } catch (err) {
