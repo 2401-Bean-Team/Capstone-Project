@@ -38,6 +38,7 @@ try{
 
 const editProduct = async (newValues) => {
 try{
+    
     const { id, name, price, description, roast, image } = newValues
     const { rows: [editedProduct] } = await db.query(`
       UPDATE products

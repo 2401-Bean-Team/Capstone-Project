@@ -42,9 +42,29 @@ const requireToken = (req, res, next) => {
   try {
     const newProductData = req.body;
     const newProduct = await createProduct(newProductData);
-    res.send(newProduct)
-  } catch (err) {
-    next(err)
-  }
+      res.send(newProduct)
+    } catch (err) {
+       next(err);
+    }
 
-  })
+  });
+
+  adminPageRouter.delete('/deleteproduct', async (req, res, next) => {
+    try {
+      const deleteProductData = req.body;
+      const deleteProduct = await deleteProduct(deleteProductData) 
+      res.send(deleteProduct);       
+    } catch (err) {
+        next(err);
+    }
+  });
+
+  adminPageRouter.put('/editproduct', async (req, res, next) => {
+    try {
+      const editProductData = req.body
+      const editProduct = await editProduct(editProductData);
+      res.send(editProduct)  
+    } catch (err) {
+        next(err);
+    }
+  });
