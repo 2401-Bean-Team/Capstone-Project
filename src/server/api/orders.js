@@ -18,9 +18,9 @@ const requireToken = (req, res, next) => {
 // Apply requireToken middleware to relevant routes
 orderRouter.use(requireToken);
 
-orderRouter.get('/myCart', async (req, res, next) => {
+orderRouter.get('/:userId', async (req, res, next) => {
     try {
-        const userId = req.user.id
+      const userId = req.params.userId
       const order = await getCart({ userId });
       res.send(order);
     } catch(err) {
@@ -47,7 +47,7 @@ orderRouter.get('/myCart', async (req, res, next) => {
         const orderId = req.params.orderId; 
         const {  address } = req.body;
 
-        const order = await getOrder({ orderId });
+        const order = await getCart({ userId });
         if (order.length > 0) {
             let updatedOrder = await updateAddress(
                 orderId,
@@ -67,7 +67,7 @@ orderRouter.get('/myCart', async (req, res, next) => {
         const orderId = req.params.orderId; 
         const {  status } = req.body;
 
-        const order = await getOrder({ orderId });
+        const order = await getCart({ userId });
         if (order.length > 0) {
             let updatedOrder = await updateStatus(
                 orderId,

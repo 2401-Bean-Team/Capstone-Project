@@ -52,9 +52,22 @@ const updateQuantity = async ({ orderId, productId, quantity }) => {
     }
 }
 
+const getOrderItems = async ({ orderId }) => { 
+    try{
+      const { rows } = await db.query(`
+        SELECT * FROM order_product
+        WHERE "orderId" = $1
+        `, [ orderId ]);
+        return rows;
+    } catch (err) {
+        throw err;
+      }
+    }
+
 module.exports = {
     addProduct,
     deleteCartSingle,
     deleteCart,
-    updateQuantity
+    updateQuantity,
+    getOrderItems
 }

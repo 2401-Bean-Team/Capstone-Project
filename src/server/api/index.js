@@ -66,9 +66,9 @@ apiRouter.use((err, req, res, next) => {
 
   apiRouter.use('/products', require('./products'))
 
-  apiRouter.use('/cart', require ('./orders'))
+  apiRouter.use('/orders', require ('./orders'))
 
-  apiRouter.use('/order_product', require('./order_product'))
+  apiRouter.use('/cart', require('./order_product'))
  
 
 module.exports = apiRouter;

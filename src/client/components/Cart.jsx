@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react" 
 import axios from "axios"
 import { useNavigate, NavLink } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
 //useState ternary combo to only display cart if logged in?(in navbar?)
 
@@ -17,100 +18,169 @@ export default function ShoppingCart({ token, email }) {
     const [user, setUser] = useState(null)
     const [orderId, setOrderId] = useState(null)
     const [products, setProducts] = useState([])
+    const [productsWithDetails, setProductsWithDetails] = useState([])
     const [error, setError] = useState(null)
 
-    useEffect(() => { 
+    useEffect(() => {
         const fetchUser = async () => {
+            try {
+                const { data } = await axios.get(`/api/users/me?email=${email}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log("USER DATA", data.user)
+                setUser(data.user);
+            } catch (error) {
+                setError(error);
+            }
+        };
+    
+        fetchUser();
+    }, [email, token]);
+    console.log('user: ', user)
+    useEffect(() => {
+        const fetchOrder = async () => {
           try {
-            const { data } = await axios.get(`/api/users/me?email=${email}`, {
-              headers: {
-                Authorization: `Bearer ${token}`
+            if (!user) return; // Exit if user is not defined yet
+    
+            const { data } = await axios.get(`/api/orders/${user.id}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
               }
-            });
-            console.log("USERDATA", data.user);
-            setUser(data.user)
-            
+            );
+            if (data.length > 0) {
+                console.log('order id: ',data[0].id)
+              setOrderId(data[0].id); // Set orderId only if data is not empty
+            }
           } catch (error) {
             setError(error);
           }
-        }  
+        };
     
-      // Call the fetchUser function when the component mounts
-      fetchUser();
+        fetchOrder();
+      }, [user, token]);
+
+      useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+              if (!orderId) return; 
+      
+              const { data } = await axios.get(`/api/cart/${orderId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`
+                  }
+                }
+              );
+               
+                  console.log('order products: ',data)
+                  setProducts(data)
+            } catch (error) {
+              setError(error);
+            }
+          };
+      
+          fetchProducts();
+      }, [orderId, token])
+
+      useEffect(() => {
+        const fetchProductsDetails = async () => {
+            try {
+                if (!products.length) return; 
     
-    }, [email, token]);
+                const productIds = products.map(product => product.productId);
+                console.log('product ids', productIds);
+                const productDetails = await Promise.all(productIds.map(productId => axios.get(`/api/products/${productId}`)));
+                console.log('productdetails', productDetails);
+                // Add product quantity to the product details
+                const productsWithDetails = productDetails.map((response, index) => ({
+                    ...response.data,
+                    quantity: products[index].quantity
+                }));
+                console.log('products with details ', productsWithDetails)
+                setProductsWithDetails(productsWithDetails);
+            } catch (error) {
+                setError(error);
+            }
+        };
+    
+        fetchProductsDetails();
+    }, [products]);
+
+    const decreaseQuantity = async (product, index) => {
+      if (product.quantity > 1) {
+        const newProducts = [...productsWithDetails];
+        newProducts[index].quantity--;
+        setProductsWithDetails(newProducts);
+        await axios.put(`/api/cart/changeQuantity`, {
+          orderId: orderId,
+          productId: product.id,
+          quantity: newProducts[index].quantity
+      }, {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      });
+      }
+    };
+  
+    const increaseQuantity = async (product, index) => {
+      const newProducts = [...productsWithDetails];
+      newProducts[index].quantity++;
+      setProductsWithDetails(newProducts);
+      await axios.put(`/api/cart/changeQuantity`, {
+        orderId: orderId,
+        productId: product.id,
+        quantity: newProducts[index].quantity
+    }, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    };
+  
+    const removeItem = async (product, index) => {
+      const newProducts = productsWithDetails.filter((_, idx) => idx !== index);
+      setProductsWithDetails(newProducts);
+      await axios.delete(`/api/cart/deleteCartItem`, {
+        data: {
+            orderId: orderId,
+            productId: product.id
+        },
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    };
+
 
     if (!user) {
         return <h1>Logged out, please <NavLink to='/login'>Login</NavLink> or <NavLink to='/register'>Register</NavLink></h1>
     }
 
-    return ( 
-        <>
-              
-            <main className="account" >
-                <h1>Account details: </h1>
-                <h3>{user.name}</h3>
-                <h4>{user.email}</h4> 
-                 
-            </main>
-        </> 
-    )
-
-}
-
-
-
-
-
-
-// import React from 'react';
-
-
-// // Define a ShoppingCart component
-// function ShoppingCart({ token }) {
-//   // Initialize the state of the cart with an empty array
-//   const [cart, setCart] = React.useState([]);
-
-//   console.log('token: ', token)
-//   // Add an item to the cart
-//   function addToCart(item) {
-//     setCart([...cart, item]);
-//   }
-
-//   // Remove an item from the cart
-//   function removeFromCart(index) {
-//     const newCart = [...cart];
-//     newCart.splice(index, 1);
-//     setCart(newCart);
-//   }
-
-//   // Calculate the total price of the items in the cart
-//   function getTotalPrice() {
-//     return cart.reduce((total, item) => total + item.price, 0);
-//   }
-
-//   return (
-//     <div>
-//       {/* Display the current items in the cart */}
-//       <h2>Shopping Cart</h2>
-//       <ul>
-//         {cart.map((item, index) => (
-//           <li key={index}>
-//             {item.name} - ${item.price}
-//             <button onClick={() => removeFromCart(index)}>Remove</button>
-//           </li>
-//         ))}
-//       </ul>
-    
-//       {/* Display the total price of the items in the cart */}
-//       <p>Total: ${getTotalPrice()}</p>
-
-//       {/* Add a button to add an item to the cart */}
-//       <button onClick={() => addToCart({ name: 'Item 1', price: 10 })}>
-//         Add Item 1
-//       </button>
-//     </div>
-//   );
-// }
-
-//export default ShoppingCart;
+    return (
+      <div>
+        <h1 className="allCoffeeCoffee">Your cart:</h1>
+        <div className="allCoffee">
+          {productsWithDetails.map((product, index) => (
+            <div key={product.id} className="cartItem">
+              <Link to={`/coffee/${product.id}`}>
+                <img src={product.image} alt={product.name} />
+              </Link>
+              <h1>{product.name}</h1>
+              <h2>${product.price}</h2>
+              <h2>{product.roast}</h2>
+              <h2>Quantity: {product.quantity}</h2>
+              <button onClick={() => decreaseQuantity(product, index)}>-</button>
+              <button onClick={() => increaseQuantity(product, index)}>+</button>
+              <button onClick={() => removeItem(product, index)}>Remove</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+ 

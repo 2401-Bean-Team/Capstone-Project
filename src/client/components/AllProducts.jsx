@@ -27,7 +27,7 @@ export default function AllProducts() {
                     <Link to={`/coffee/${c.id}`}>
                         <img src={c.image} alt={c.name} />
                         <h1>{c.name}</h1>
-                        <h2>{c.price}</h2>
+                        <h2>${c.price}</h2>
                         <h2>{c.roast}</h2>
                     </Link>
                 </div>
