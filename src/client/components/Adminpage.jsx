@@ -1,23 +1,38 @@
 import { useEffect, useState } from "react"
-//import { deleteProduct, editProduct } from '..db/product'
 import axios from "axios"
 import { Link } from 'react-router-dom'
 
-async function Adminpage() {
+function Adminpage() {
     const [coffee, setCoffee] = useState([]);
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
-        async function fetchCoffee() {
-            const { data } = await axios.get('/api/products')
-
-            setCoffee(data)
+        async function fetchCoffee() {   
+            try {
+                const { data } = await axios.get('/api/products');
+                setCoffee(data);
+                setLoading(false); // Set loading to false after data is fetched
+            } catch (error) {
+                console.error('Error fetching coffee:', error);
+                setLoading(false); // Set loading to false in case of error
+            }
         }
-        fetchCoffee()
+        fetchCoffee();
     }, [])
-    console.log( coffee )
 
     async function deleteHandler(productId) {
-        await deleteProduct(productId)
+        try {
+            // Call your deleteProduct function here passing the productId
+            await deleteProduct(productId);
+            
+            // After successful deletion, update the coffee state to reflect the changes
+            setCoffee(coffee.filter(item => item.id !== productId));
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        }
+    }
+    if (loading) {
+        return <div>Loading...</div>; // Render loading indicator
     }
 
     return (
@@ -29,11 +44,12 @@ async function Adminpage() {
                 <div key={c.id} className="coffee">
                     <Link to={`/coffee/${c.id}`}>
                         <img src={c.image} alt={c.name} />
+                        </Link>
                         <h1>{c.name}</h1>
                         <h2>{c.price}</h2>
                         <h2>{c.roast}</h2>
-                        <button onClick={() => deleteHandler(productId)}>DELETE!</button>
-                    </Link>
+                        <button onClick={() => deleteHandler(c.id)}>DELETE!</button>
+                    
                 </div>
 
             ))}

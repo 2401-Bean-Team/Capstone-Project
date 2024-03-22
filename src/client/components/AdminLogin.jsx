@@ -32,7 +32,7 @@ const AdminLogin = ({ setToken, setName, name }) => {
       setMessage(result.message);
       if (response.ok) {
         setToken(result.token); // Set the token upon successful login
-        //navigate('/account'); // Redirect to the account page
+        navigate('/adminpage'); // Redirect to the account page
       } else {
         throw result;
       } 
