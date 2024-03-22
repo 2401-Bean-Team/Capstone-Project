@@ -48,3 +48,5 @@ const requireToken = (req, res, next) => {
   }
 
   })
+
+  module.exports = adminPageRouter

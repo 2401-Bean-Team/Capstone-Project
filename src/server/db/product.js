@@ -1,6 +1,6 @@
 const db = require('./client')
 
-const createProduct = async ({ name='coffee', price, description, roast, image }) => {
+const createProduct = async ({ name, price, description, roast, image }) => {
 try{
   const { rows: [product ] } = await db.query(`
     INSERT INTO products(name, price, description, roast, image)
