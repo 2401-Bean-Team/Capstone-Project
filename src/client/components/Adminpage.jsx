@@ -43,6 +43,4 @@ async function Adminpage() {
     );
 }
 
-module.exports = { 
-Adminpage,
-}
+export default Adminpage
