@@ -6,13 +6,14 @@ const {
     getUser,
     getUserByEmail,
     getUserById,
+    getUserList,
 } = require('../db/users');
 
 const jwt = require('jsonwebtoken')
 
 usersRouter.get('/', async( req, res, next) => {
     try {
-        const users = await getAllUsers();
+        const users = await getUserList();
 
         res.send({
             users

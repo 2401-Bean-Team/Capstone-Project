@@ -48,6 +48,19 @@ const getUser = async({email, password}) => {
     }
 }
 
+const getUserList = async () => {
+    try{
+      const { rows } = await db.query(`
+        SELECT * FROM users;
+      `)
+        return rows;
+    } catch (err) {
+        throw err;
+      }
+    }
+
+
+
 const getAdminUser = async({name, password}) => {
     if(!name || !password) {
         return;
@@ -68,7 +81,7 @@ const getAdminUser = async({name, password}) => {
 const getUserByEmail = async(email) => {
     try {
         const { rows: [ user ] } = await db.query(`
-        SELECT * 
+        SELECT *
         FROM users
         WHERE email=$1;`, [ email ]);
 
@@ -84,7 +97,7 @@ const getUserByEmail = async(email) => {
 const getUserById = async(userId) => {
     try {
         const { rows: [ user ] } = await db.query(`
-        SELECT * 
+        SELECT *
         FROM users
         WHERE password = $1;`, [ userId ]);
 
@@ -100,7 +113,7 @@ const getUserById = async(userId) => {
 const getAdminUserById = async(adminUserId) => {
     try {
         const { rows: [ adminUser ] } = await db.query(`
-        SELECT * 
+        SELECT *
         FROM adminUsers
         WHERE password = $1;`, [ adminUserId ]);
 
@@ -116,7 +129,7 @@ const getAdminUserById = async(adminUserId) => {
 const getAdminUserByName = async(name) => {
     try {
         const { rows: [ adminUser ] } = await db.query(`
-        SELECT * 
+        SELECT *
         FROM adminUsers
         WHERE name=$1;`, [ name ]);
 
@@ -137,5 +150,6 @@ module.exports = {
     createAdminUser,
     getAdminUserById,
     getAdminUserByName,
-    getAdminUser
+    getAdminUser,
+    getUserList
 };

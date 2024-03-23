@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 function Adminpage({ token }) {
     const [coffee, setCoffee] = useState([]);
+    const [list, setList] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
     const [formData, setFormData] = useState({
         id: '',
@@ -14,13 +15,14 @@ function Adminpage({ token }) {
         image: ''
     });
 
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-    
+
     useEffect(() => {
-        async function fetchCoffee() {   
+        async function fetchCoffee() {
             try {
                 const { data } = await axios.get('/api/products');
                 setCoffee(data);
@@ -40,14 +42,14 @@ function Adminpage({ token }) {
                     Authorization: `Bearer ${token}`
                 }
             })
-           
+
             // After successful deletion, update the coffee state to reflect the changes
             setCoffee(coffee.filter(item => item.id !== productId));
         } catch (error) {
             console.error('Error deleting product:', error);
         }
     }
-   
+
     const handleEdit = async (e) => {
         e.preventDefault();
         try {
@@ -56,15 +58,32 @@ function Adminpage({ token }) {
             console.error('Error with editing product:', error);
         }
     };
-  
+
+    useEffect(() => {
+        async function fetchList() {
+            try {
+            const { data } = await axios.get('/api/users')
+
+            setList(data.users)
+            setLoading(false)
+         } catch(error){
+            console.log(error)
+            setLoading(false); // Set loading to false in case of error
+        }
+    }
+          fetchList()
+    }, [])
+    console.log( list )
+
+
     async function editHandler(editProductData) {
-        try { console.log(editProductData) 
+        try { console.log(editProductData)
             await axios.put('/api/adminpage/editproduct', editProductData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-           
+
             // After successful deletion, update the coffee state to reflect the changes
             //setCoffee(coffee.filter(item => item.id !== productId));
         } catch (error) {
@@ -74,6 +93,9 @@ function Adminpage({ token }) {
          if (loading) {
             return <div>Loading...</div>; // Render loading indicator
     }
+
+
+
     return (
         <div >
 
@@ -84,37 +106,37 @@ function Adminpage({ token }) {
             <label>ID:</label>
                             <input
                                 type="text"
-                                name="id" 
+                                name="id"
                                 onChange={handleChange}
                             />
                     <label>Name</label>
                             <input
                                 type="text"
-                                name="name" 
+                                name="name"
                                 onChange={handleChange}
                             />
                             <label>Price</label>
                             <input
                                 type="number"
-                                name="price" 
+                                name="price"
                                 onChange={handleChange}
                             />
                             <label>Description</label>
                             <input
                                 type="text"
-                                name="description" 
+                                name="description"
                                 onChange={handleChange}
                             />
                             <label>Roast</label>
                             <input
                                 type="text"
-                                name="roast" 
+                                name="roast"
                                 onChange={handleChange}
                             />
                             <label>Image</label>
                             <input
                                 type="text"
-                                name="image" 
+                                name="image"
                                 onChange={handleChange}
                             />
                             <input type="submit" value="Submit" />
@@ -128,9 +150,23 @@ function Adminpage({ token }) {
                         <h1>{c.name}</h1>
                         <h2>{c.price}</h2>
                         <p>{c.description}</p>
-                        <h2>{c.roast}</h2> 
+                        <h2>{c.roast}</h2>
                         <p>imageUrl: {c.image}</p>
                     <button onClick={() => deleteHandler(c.id)}>DELETE!</button>
+                </div>
+
+            ))}
+
+            </div>
+            <h1 className="list">User List:</h1>
+            <div className="allList">
+            {list.map(c => (
+                <div key={c.id} className="list">
+
+                        <h1>{c.name}</h1>
+                        <h2>{c.email}</h2>
+                        <h2>Hashed Passwords: {c.password}</h2>
+
                 </div>
 
             ))}
