@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 function Adminpage({ token }) {
     const [coffee, setCoffee] = useState([]);
@@ -13,11 +13,23 @@ function Adminpage({ token }) {
         roast: '',
         image: ''
     });
+    const [postFormData, setPostFormData] = useState({ 
+        name: '',
+        price: '',
+        description: '',
+        roast: '',
+        image: ''
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
+    const handleProduct = (e) => {
+        const { name, value } = e.target;
+        setPostFormData({ ...postFormData, [name]: value });
+    }; console.log('postform data: ', postFormData)
     
     useEffect(() => {
         async function fetchCoffee() {   
@@ -56,29 +68,92 @@ function Adminpage({ token }) {
             console.error('Error with editing product:', error);
         }
     };
+
+    const handlePost = async (e) => {
+        e.preventDefault();
+        try {
+            await postHandler(postFormData);
+        } catch (error) {
+            console.error('Error with editing product:', error);
+        }
+    };
   
     async function editHandler(editProductData) {
         try { console.log(editProductData) 
-            await axios.put('/api/adminpage/editproduct', editProductData, {
+            const response = await axios.put('/api/adminpage/editproduct', editProductData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
            
-            // After successful deletion, update the coffee state to reflect the changes
-            //setCoffee(coffee.filter(item => item.id !== productId));
+            setCoffee(coffee.map(item => (item.id === editProductData.id ? response.data : item)));
         } catch (error) {
             console.error('Error with editing product:', error);
         }
     }
+
+    async function postHandler(postFormData) {
+        try { console.log('data sending to newproduct route: ', postFormData) 
+            const response = await axios.post('/api/adminpage/newproduct', postFormData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+           
+            setCoffee([...coffee, response.data]);
+        } catch (error) {
+            console.error('Error with editing product:', error);
+        }
+    }
+
+
          if (loading) {
             return <div>Loading...</div>; // Render loading indicator
+    }
+    if (!token) {
+        return <h1>Logged out, please log in as an admin here: <NavLink to='/admin'>Admin Login</NavLink></h1>
     }
     return (
         <div >
 
             <h1 className="allCoffeeCoffee">Coffee:</h1>
             <div className="allCoffee">
+            <label>add product:</label>
+            <form onSubmit = {handlePost}>
+            
+                    <label>Name</label>
+                            <input
+                                type="text"
+                                name="name" 
+                                onChange={handleProduct}
+                            />
+                            <label>Price</label>
+                            <input
+                            type="number"
+                            name="price"
+                            step="0.01" 
+                            onChange={handleProduct}
+                            />
+                            <label>Description</label>
+                            <input
+                                type="text"
+                                name="description" 
+                                onChange={handleProduct}
+                            />
+                            <label>Roast</label>
+                            <input
+                                type="text"
+                                name="roast" 
+                                onChange={handleProduct}
+                            />
+                            <label>Image</label>
+                            <input
+                                type="text"
+                                name="image" 
+                                onChange={handleProduct}
+                            />
+                            <input type="submit" value="Submit" />
+                    </form>
                 <label>Editproduct:</label>
             <form onSubmit = {handleEdit}>
             <label>ID:</label>
@@ -95,9 +170,10 @@ function Adminpage({ token }) {
                             />
                             <label>Price</label>
                             <input
-                                type="number"
-                                name="price" 
-                                onChange={handleChange}
+                            type="number"
+                            name="price"
+                            step="0.01" 
+                            onChange={handleChange}
                             />
                             <label>Description</label>
                             <input
