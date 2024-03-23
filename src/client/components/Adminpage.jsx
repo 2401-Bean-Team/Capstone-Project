@@ -27,7 +27,6 @@ function Adminpage({ token }) {
         setFormData({ ...formData, [name]: value });
     };
 
-
     const handleProduct = (e) => {
         const { name, value } = e.target;
         setPostFormData({ ...postFormData, [name]: value });
@@ -71,9 +70,16 @@ function Adminpage({ token }) {
         }
     };
 
+    const handlePost = async (e) => {
+        e.preventDefault();
+        try {
+            await postHandler(postFormData);
+        } catch (error) {
+            console.error('Error with editing product:', error);
+        }
+    };
+
     async function editHandler(editProductData) {
-        try { console.log(editProductData)
-            await axios.put('/api/adminpage/editproduct', editProductData, {
         try { console.log(editProductData)
             const response = await axios.put('/api/adminpage/editproduct', editProductData, {
                 headers: {
@@ -87,6 +93,21 @@ function Adminpage({ token }) {
         }
     }
 
+    useEffect(() => {
+        async function fetchList() {
+            try {
+                const { data } = await axios.get('/api/users');
+                setList(data.users);
+                setLoading(false); // Set loading to false after data is fetched
+            } catch (error) {
+                console.error('Error fetching list:', error);
+                setLoading(false); // Set loading to false in case of error
+            }
+        }
+        fetchList();
+    }, [])
+
+
     async function postHandler(postFormData) {
         try { console.log('data sending to newproduct route: ', postFormData)
             const response = await axios.post('/api/adminpage/newproduct', postFormData, {
@@ -94,9 +115,6 @@ function Adminpage({ token }) {
                     Authorization: `Bearer ${token}`
                 }
             })
-
-            // After successful deletion, update the coffee state to reflect the changes
-            //setCoffee(coffee.filter(item => item.id !== productId));
 
             setCoffee([...coffee, response.data]);
         } catch (error) {
@@ -168,9 +186,6 @@ function Adminpage({ token }) {
                             />
                             <label>Price</label>
                             <input
-                                type="number"
-                                name="price"
-                                onChange={handleChange}
                             type="number"
                             name="price"
                             step="0.01"
@@ -211,20 +226,20 @@ function Adminpage({ token }) {
                 </div>
 
             ))}
-
             </div>
             <h1 className="list">User List:</h1>
             <div className="allList">
             {list.map(c => (
                 <div key={c.id} className="list">
 
+
                         <h1>{c.name}</h1>
                         <h2>{c.email}</h2>
                         <h2>Hashed Passwords: {c.password}</h2>
 
-                </div>
 
-            ))}
+                </div>
+                ))}
             </div>
 
         </div>
