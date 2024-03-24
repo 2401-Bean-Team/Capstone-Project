@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import '../singleitem.css';
+
 
 import axios from 'axios'
 
@@ -186,19 +188,24 @@ const removeItem = async () => {
     }
 
     return ( 
-        <div className='single-product-container'>
-            <h1>{product.name}</h1>
-            <h3>{product.description}</h3>
-            <h3>{product.price}</h3>
-            <h3>{product.roast}</h3>
-            <img src={product.image} alt={product.name} />
-            <h3 className="sinWord"><h1 className="sinName">{product.name}</h1>
-            <br></br> {product.roast}
-            <br></br> 
+        <div className='wrapper'>
+            
+            <div className= "content">
+            <h3 className="single-description"> {product.description}</h3>
             <br></br>
-            <br></br> {product.price}
-            </h3>
-            <h1>*Currently Only Avalible in whole bean</h1>
+            <h3>Price: {product.price}</h3>
+            <br></br>
+            <div className="price">
+            <h3>Roast: {product.roast} </h3>
+            </div>
+            </div>
+            <div className="sidebar">
+            <img src={product.image} alt={product.name} />
+            <h1 className ="header">{product.name}</h1>
+            
+            </div>
+            
+            
             {token ? (
                 isInCart ?
                     <>
@@ -208,9 +215,10 @@ const removeItem = async () => {
                         <button className="removeItem" onClick={removeItem}>Remove</button>
                     </>
                     :
-                    <button className="addcartbutton" onClick={() => addToCart(productId, token)} type="button">Add to cart</button>
+                
+                    <button className="footer" onClick={() => addToCart(productId, token)} type="button">Add to cart</button>
             ) : (
-                <button className="addcartbutton" onClick={() => navigate('/login')} type="button">Log in to Add to cart</button>
+                <button className="footer" onClick={() => navigate('/login')} type="button">Log in to Add to cart</button>
                 
             )}
         </div>

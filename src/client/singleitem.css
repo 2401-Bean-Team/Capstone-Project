@@ -1,0 +1,107 @@
+.header {
+    font-size: 7vw;
+}
+  
+  
+  .footer {
+    grid-area: ft;
+    --b: 3px;   /* border thickness */
+    --s: .45em; /* size of the corner */
+    --color: #373B44;
+  
+    padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+    color: var(--color);
+    --_p: var(--s);
+    background:
+      conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+      var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+    transition: .3s linear, color 0s, background-color 0s;
+    outline: var(--b) solid #0000;
+    outline-offset: .6em;
+    font-size: 16px;
+  
+    border: 0;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  .footer:hover,
+  .footer:focus-visible{
+    --_p: 0px;
+    outline-color: var(--color);
+    outline-offset: .05em;
+  }
+  
+  .content {
+    grid-area: main;
+  }
+  .sidebar {
+    grid-area: sd;
+
+ 
+  }
+  .sidebar img{
+    height:20vw;
+    width: auto;
+    position: relative;
+    border-radius: 25px;
+      border: 4px outset black;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    
+    
+    }
+  
+  * {
+    box-sizing: border-box;
+  }
+
+  .price{
+    justify-self: end;
+  }
+  
+  .wrapper header{
+    justify-content: center;
+    font-size: 30px;
+  }
+  .wrapper {
+    background-color: rgba(233, 241, 239, 0.993);
+    margin-bottom: 10px;
+    position: relative;
+    font-family: "Ropa Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 25px;
+    border: 4px outset burlywood;
+    padding: 20px;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: .45fr 1.5fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 100px;
+    grid-row-gap: 15px;
+  }
+  
+  .wrapper > div {
+    font-size: 40px;
+    box-sizing: border-box;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: lightgray;
+  border: 2px, black;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    grid-template-areas:
+      "sd sd sd main main main main main main"
+      "sd sd sd main main main main main main"
+      "sd sd sd  ft  ft   ft   ft   ft   ft";
+  }
+  
