@@ -20,7 +20,7 @@ function App() {
   return (
 < div className = 'App'>
 <header>
-        <h1>Coding Coffee</h1>
+        
         <NavBar className="navagation" token={token} />
       </header>
     <Routes>
