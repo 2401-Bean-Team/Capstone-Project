@@ -28,14 +28,15 @@ orderRouter.get('/:userId', async (req, res, next) => {
     }
   });
 
-  orderRouter.post('/newOrder', async (req, res, next) => {
+  orderRouter.post('/newOrder/:userId', async (req, res, next) => {
     try {
-        const { userId, address, status } = req.body;
-        if (!userId || !address || !status) {
-            return res.status(400).send("Missing required fields");
-        }
+        const userId = req.params.userId 
 
-        const newOrder = await createOrder({ userId, address, status });
+        const newOrder = await createOrder({ 
+            userId: userId, 
+            address: '', 
+            status: true
+        });
         res.send(newOrder)
     } catch (error) {
        next(error) 
@@ -64,19 +65,13 @@ orderRouter.get('/:userId', async (req, res, next) => {
 
   orderRouter.put('/:orderId/changeStatus', async (req, res, next) => {
     try {
-        const orderId = req.params.orderId; 
-        const {  status } = req.body;
+        const orderId = req.params.orderId;  
 
-        const order = await getCart({ userId });
-        if (order.length > 0) {
             let updatedOrder = await updateStatus(
                 orderId,
-                status
+                false
             )
             res.send(updatedOrder)
-        } else {
-            res.status(404).send(`No order found with userId: ${userId}`)
-        }
     } catch (error) {
         next(error)
     }

@@ -1,10 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const Register = () => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('');
+const Register = ({ setToken, token, setEmail, email }) => {
+  const [name, setName] = useState('') 
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(''); 
+
+
+      const fetchUserData = async (email, token) => {
+        
+        try {
+          const { data } = await axios.get(`/api/users/me?email=${email}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          console.log("USER DATA", data.user); 
+          createOrder(data.user.id, token)
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      };
+
+
+  const createOrder = async (userId, token)=> {
+    
+    await axios.post(`/api/orders/newOrder/${userId}`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    }); 
+  }
+ 
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -32,10 +59,13 @@ const Register = () => {
             })
         });
         const result = await response.json();
+        await setToken(result.token)
+        console.log('result: ', result)
         setMessage(result.message);
+        fetchUserData(email, result.token)
         if(!response.ok) {
           throw(result)
-        }
+        }   
         setName('');
         setEmail('');
         setPassword('');
@@ -48,6 +78,9 @@ const Register = () => {
     e.preventDefault();
     register();
   };
+
+
+  
 
 
   return (
