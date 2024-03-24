@@ -66,8 +66,7 @@ const Register = ({ setToken, token, setEmail, email }) => {
         if(!response.ok) {
           throw(result)
         }   
-        setName('');
-        setEmail('');
+        setName(''); 
         setPassword('');
     } catch (err) {
         console.error(`${err.name}: ${err.message}`);
