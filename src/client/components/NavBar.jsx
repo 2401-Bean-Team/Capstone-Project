@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 //need to add usestate and ternary to determine if logged in 
 //before displaying account/cart... if so do not display login/register
 
-export default function NavBar() {
+export default function NavBar({ token }) {
 
 
     return <div className='NAVBAR'>
