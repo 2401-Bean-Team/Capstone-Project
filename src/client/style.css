@@ -2,6 +2,9 @@
   margin: 0;
   padding:0;
   box-sizing: border-box;
+  font-family: "Ropa Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .App {
@@ -196,7 +199,7 @@ ALLPRODUCTS CSS */
   flex-wrap: wrap;
  padding: 10px;
 
- background-color: #38220f;
+ background-color: #ede4dc;
  padding: 2px;
   border-radius: 25px;
   border: 4px ridge rgb(238, 213, 170);
@@ -211,6 +214,44 @@ ALLPRODUCTS CSS */
 }
 
 .coffee {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #373B44;
+
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 4px;
+}
+
+
+.coffee:hover,
+.coffee:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+.coffee:active {
+  background: var(--color);
+  color: #fff;
+}
+
+
+/* .coffee {
   display:flex;
   padding: 2px;
   border-radius: 25px;
@@ -223,7 +264,7 @@ background-color:#fffbf8 ;
 transition-duration: 350ms;
   transform: scale(1.05);
 
-}
+} */
 
 
 .coffee img {
