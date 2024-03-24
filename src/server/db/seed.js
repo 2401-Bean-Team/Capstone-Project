@@ -124,11 +124,21 @@ const orders = [
   {
     userId: "2",
     address: "456 cinnamon street, Canada",
-    status: false
+    status: true
   },
   {
     userId: "3",
     address: "789 vanilla street, Australia",
+    status: true
+  },
+  {
+    userId: "4",
+    address: "123 sesame street, USA",
+    status: true
+  },
+  {
+    userId: "5",
+    address: "123 sesame street, USA",
     status: true
   }
 ]

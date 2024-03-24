@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { useNavigate, NavLink } from "react-router-dom"; 
 import { Link } from "react-router-dom";
+import '../cart.css'
 
 //useState ternary combo to only display cart if logged in?(in navbar?)
 
@@ -19,6 +20,7 @@ export default function ShoppingCart({ token, email }) {
     const [orderId, setOrderId] = useState(null)
     const [products, setProducts] = useState([])
     const [productsWithDetails, setProductsWithDetails] = useState([])
+    const [checkedOut, setCheckedOut] = useState(false)
     const [error, setError] = useState(null)
 
     useEffect(() => {
@@ -110,6 +112,12 @@ export default function ShoppingCart({ token, email }) {
         fetchProductsDetails();
     }, [products]);
 
+    useEffect(() => { 
+      return () => {
+        setCheckedOut(false);
+      };
+    }, []);
+
     const decreaseQuantity = async (product, index) => {
       if (product.quantity > 1) {
         const newProducts = [...productsWithDetails];
@@ -156,17 +164,46 @@ export default function ShoppingCart({ token, email }) {
     });
     };
 
+    const  handleCheckout = async () => {
+      await axios.put( `/api/orders/${orderId}/changeStatus`, {}, {
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+  } );
+    await axios.post(`api/orders/newOrder/${user.id}`, {}, {
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+  });
+  setCheckedOut(true)
+    }
+
 
     if (!user) {
-        return <h1>Logged out, please <NavLink to='/login'>Login</NavLink> or <NavLink to='/register'>Register</NavLink></h1>
+        return <h1>Hey, friend you're logged out - please <NavLink to='/login'>Login</NavLink> or <NavLink to='/register'>Register</NavLink></h1>
     }
+
+    if(products.length  === 0){
+      return (
+        <div className="cartEmpty"> 
+        <h1>Hey, friend your cart is empty or we f*cked up -<Link to="/" > Browse coffee here!</Link></h1>  
+        </div>
+      )}
+
+    if(checkedOut) {
+      return (
+      <div className="checkedOut"> 
+      <h1>Order complete! You will never receive this coffee, but you also payed nothing for it.</h1> 
+      <Link to="/" >Shop for more</Link>
+      </div>
+    )}
 
     return (
       <div>
         <h1 className="allCoffeeCoffee">Your cart:</h1>
         <div className="allCoffee">
           {productsWithDetails.map((product, index) => (
-            <div key={product.id} className="cartItem">
+            <div key={`${product.id}-${index}`} className="cartItem">
               <Link to={`/coffee/${product.id}`}>
                 <img src={product.image} alt={product.name} />
               </Link>
@@ -176,10 +213,11 @@ export default function ShoppingCart({ token, email }) {
               <h2>Quantity: {product.quantity}</h2>
               <button onClick={() => decreaseQuantity(product, index)}>-</button>
               <button onClick={() => increaseQuantity(product, index)}>+</button>
-              <button onClick={() => removeItem(product, index)}>Remove</button>
+              <button onClick={() => removeItem(product, index)}>Remove</button> 
             </div>
           ))}
         </div>
+        <button onClick={handleCheckout}>Check Out</button>
       </div>
     );
   }
