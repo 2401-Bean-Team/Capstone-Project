@@ -226,7 +226,7 @@ const createTables = async () => {
           id SERIAL PRIMARY KEY,
           "orderId" TEXT,
           "productId" TEXT,
-          quantity TEXT
+          quantity INTEGER
       )`)
 
     }

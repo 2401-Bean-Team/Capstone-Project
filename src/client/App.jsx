@@ -26,7 +26,7 @@ function App() {
     <Routes>
 
       <Route path='/' element={<AllProducts />} />
-      <Route path='/coffee/:productId' element={<SingleProduct />} />
+      <Route path='/coffee/:productId' element={<SingleProduct token={token} email={email} />} />
       <Route path='/login' element={<Login setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
       <Route path='/account' element={<Account token={token} setToken={setToken} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />} />
       <Route path='/register' element={<Register setToken={setToken} />} /> 

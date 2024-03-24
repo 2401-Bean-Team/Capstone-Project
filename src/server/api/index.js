@@ -55,7 +55,7 @@ apiRouter.use('/users', usersRouter);
 const adminUserRouter = require('./adminUser');
 apiRouter.use('/adminUser', adminUserRouter);
 
-const adminPageRouter = require('./adminpage');
+const adminPageRouter = require('./adminPage');
 apiRouter.use('/adminpage', adminPageRouter);
 
 apiRouter.use((err, req, res, next) => {
