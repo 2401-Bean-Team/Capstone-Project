@@ -28,16 +28,31 @@
   border:1px solid rgb(245, 132, 132);
   height:100px;
   border-radius:50%;
-  grid-column-start: col-start 2;
+  justify-self: center;
+}
+.NAVBAR i {
+  font-size: 40px;
+margin-top: 25px;
+margin-right: 0px;
+justify-self: end;
+color: #232323;
+list-style-type: none;
+text-decoration: none;
+
+}
+.icon{
+  justify-self: end;
+  margin-right: 20px;
 }
 
 .NAVBAR {
   background-color: #c8752294;
-  display: grid;
-grid-template-columns: .2fr .8fr .2fr;
-grid-template-rows: 1fr;
-grid-column-gap: 6px;
-grid-row-gap: 6px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 2px;
+    grid-row-gap: 0px;
+
 }
 
 #menuToggle
@@ -154,7 +169,6 @@ grid-row-gap: 6px;
   background: #ededed;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
-  /* to stop flickering of text in safari */
 
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
@@ -168,9 +182,6 @@ grid-row-gap: 6px;
   font-size: 22px;
 }
 
-/*
- * And let's slide it in from the left
- */
 #menuToggle input:checked ~ ul
 {
   transform: none;
@@ -415,3 +426,73 @@ width: 50px;
 margin-top: 15px;
 margin-left: 15px;
   }
+
+
+  /* account */
+  .account {
+background-color: chartreuse;
+font-family: "Ropa Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  border-radius: 25px;
+  border: 4px ridge rgb(238, 213, 170);
+  padding: 20px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.account h1{
+  color: #d41818;
+  justify-self: center;
+  margin: 10px;
+  font-size: 40px;
+}
+.account h3{
+  color: #598298;
+  margin: 7px;
+  font-size: 25px;
+
+}
+.account h4{
+  color: #48ba4e;
+  margin-bottom: 17px;
+  font-size: 25px;
+
+}
+.accBut {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #373B44;
+
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+.accBut:hover,
+.accBut:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+.accBut:active {
+  background: var(--color);
+  color: #fff;
+}

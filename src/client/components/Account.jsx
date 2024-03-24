@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react" 
+import { useState, useEffect } from "react"
 import axios from "axios"
-import { useNavigate, NavLink } from "react-router-dom";  
+import { useNavigate, NavLink } from "react-router-dom";
 
 
 
 export default function Account({ token, setToken, email, password }) {
     const navigate = useNavigate()
     const [user, setUser] = useState(null)
-    const [error, setError] = useState(null) 
-    
+    const [error, setError] = useState(null)
+
     useEffect(() => {
         async function fetchData() {
-            try { 
+            try {
                 const userData = await getUser(email);
                 console.log('userdata: ', userData)
-                setUser(userData); 
+                setUser(userData);
             } catch (error) {
-                setError(error); 
+                setError(error);
             }
         }
 
@@ -32,11 +32,11 @@ export default function Account({ token, setToken, email, password }) {
             setError(error);
         }
     }
- 
+
     function logOut() {
-        setToken(null) 
+        setToken(null)
         navigate('/')
-    } 
+    }
 
     async function returnOrder(orderId, token) {
         try {
@@ -61,17 +61,17 @@ export default function Account({ token, setToken, email, password }) {
     if (!user ||  !token) {
         return <h1>Logged out, please <NavLink to='/login'>Login</NavLink> or <NavLink to='/register'>Register</NavLink></h1>
     }
-    return ( 
+    return (
         <>
-              
+
             <main className="account" >
                 <h1>Account details: </h1>
                 <h3>{user.user.name}</h3>
                 <h4>{user.user.email}</h4>
-                <button onClick={logOut} >Log Out</button>
-                 
+                <button className="accBut" onClick={logOut} >Log Out</button>
+
             </main>
-        </> 
-    )  
+        </>
+    )
 
 }
