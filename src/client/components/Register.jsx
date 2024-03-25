@@ -68,6 +68,7 @@ const Register = ({ setToken, token, setEmail, email }) => {
         }
         setName('');
         setPassword('');
+        setEmail('');
     } catch (err) {
         console.error(`${err.name}: ${err.message}`);
     }

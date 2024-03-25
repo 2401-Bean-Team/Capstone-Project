@@ -69,7 +69,7 @@ export default function Account({ token, setToken, email, password }) {
                 <h1>Account details: </h1>
                 <h3>{user.user.name}</h3>
                 <h4>{user.user.email}</h4>
-                <button className="accBut" onClick={logOut} >Log Out</button>
+                <button className="accBut" onClick={logOut}>Log Out</button>
 
             </main>
         </>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { Link, NavLink } from 'react-router-dom'
 
-function Adminpage({ token }) {
+function Adminpage({ token, setToken }) {
     const [coffee, setCoffee] = useState([]);
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
@@ -107,6 +107,11 @@ function Adminpage({ token }) {
         fetchList();
     }, [])
 
+    function logOut() {
+        setToken(null)
+        navigate('/')
+    }
+
 
     async function postHandler(postFormData) {
         try { console.log('data sending to newproduct route: ', postFormData)
@@ -131,6 +136,7 @@ function Adminpage({ token }) {
     }
     return (
         <div >
+            <button className="accBut" onClick={logOut}><NavLink to="/"></NavLink>Log Out</button>
 
             <h1 className="allCoffeeCoffee">Coffee:</h1>
             <div className="allCoffee">
