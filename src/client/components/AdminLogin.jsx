@@ -37,6 +37,7 @@ const AdminLogin = ({ setToken, setName, name }) => {
         throw result;
       }
       setPassword('');
+      setName('');
     } catch (err) {
       console.error(`${err.name}: ${err.message}`);
     }

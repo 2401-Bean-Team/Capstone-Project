@@ -140,99 +140,105 @@ function Adminpage({ token, setToken }) {
 
             <h1 className="allCoffeeCoffee">Coffee:</h1>
             <div className="allCoffee">
-            <label>add product:</label>
-            <form onSubmit = {handlePost}>
+                <div className="admincontain">
+            <label>Add Product:</label>
+            <form className='adminin' onSubmit = {handlePost}>
 
-                    <label>Name</label>
                             <input
+                            placeholder="Name"
                                 type="text"
                                 name="name"
                                 onChange={handleProduct}
                             />
-                            <label>Price</label>
                             <input
+                            placeholder="Price"
                             type="number"
                             name="price"
                             step="0.01"
                             onChange={handleProduct}
                             />
-                            <label>Description</label>
                             <input
+                            placeholder="Description"
                                 type="text"
                                 name="description"
                                 onChange={handleProduct}
                             />
-                            <label>Roast</label>
                             <input
+                            placeholder="Roast"
                                 type="text"
                                 name="roast"
                                 onChange={handleProduct}
                             />
-                            <label>Image</label>
                             <input
+                            placeholder="Image"
                                 type="text"
                                 name="image"
                                 onChange={handleProduct}
                             />
                             <input type="submit" value="Submit" />
                     </form>
+                    </div>
+                    <div className="admincontain">
                 <label>Editproduct:</label>
-            <form onSubmit = {handleEdit}>
-            <label>ID:</label>
+            <form className='adminin'
+            onSubmit = {handleEdit}>
                             <input
+                            placeholder="ID"
                                 type="text"
                                 name="id"
                                 onChange={handleChange}
                             />
-                    <label>Name</label>
                             <input
+                            placeholder="Name"
                                 type="text"
                                 name="name"
                                 onChange={handleChange}
                             />
-                            <label>Price</label>
                             <input
+                            placeholder="Price"
                             type="number"
                             name="price"
                             step="0.01"
                             onChange={handleChange}
                             />
-                            <label>Description</label>
                             <input
+                            placeholder="Description"
                                 type="text"
                                 name="description"
                                 onChange={handleChange}
                             />
-                            <label>Roast</label>
                             <input
+                            placeholder="Roast"
                                 type="text"
                                 name="roast"
                                 onChange={handleChange}
                             />
-                            <label>Image</label>
                             <input
+                            placeholder="Image"
                                 type="text"
                                 name="image"
                                 onChange={handleChange}
                             />
                             <input type="submit" value="Submit" />
                     </form>
+                    </div>
+                    <div className="justallcoffee">
             {coffee.map(c => (
-                <div key={c.id} className="coffee">
-                    <Link to={`/coffee/${c.id}`}>
+                <div key={c.id} className="justcoffee">
+
                         <img src={c.image} alt={c.name} />
-                        </Link>
                         <h1>ID: {c.id}</h1>
                         <h1>{c.name}</h1>
                         <h2>{c.price}</h2>
                         <p>{c.description}</p>
                         <h2>{c.roast}</h2>
-                        <p>imageUrl: {c.image}</p>
-                    <button onClick={() => deleteHandler(c.id)}>DELETE!</button>
+                    <button className='redbutton' onClick={() => deleteHandler(c.id)}>DELETE!</button>
                 </div>
 
             ))}
             </div>
+            </div>
+                <div className="userListcoffee">
             <h1 className="list">User List:</h1>
             <div className="allList">
             {list.map(c => (
@@ -240,14 +246,14 @@ function Adminpage({ token, setToken }) {
 
 
                         <h1>{c.name}</h1>
-                        <h2>{c.email}</h2>
+                        <h2>Email: {c.email}</h2>
                         <h2>Hashed Passwords: {c.password}</h2>
 
 
                 </div>
                 ))}
             </div>
-
+            </div>
         </div>
     );
 }
