@@ -34,7 +34,9 @@ const Login = ({ setToken, setEmail, email }) => {
       setMessage(result.message);
       if (response.ok) {
         setToken(result.token); // Set the token upon successful login
-        //navigate('/cart'); // Redirect to the account page
+        setTimeout(() => {
+          navigate('/');
+        }, 1000);
       } else {
         throw result;
       }
