@@ -13,17 +13,17 @@ function SingleProduct({ token, email }) {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null)
-    const [orderId, setOrderId] = useState('null') 
+    const [orderId, setOrderId] = useState('null')
     const [quantity, setQuantity] = useState(1)
     const [isInCart, setIsInCart ]=useState(false)
     const [productsWithDetails, setProductsWithDetails] = useState([])
     const [newItemData, setNewItemData] = useState({
-        orderId: orderId, 
-        productId: productId, 
+        orderId: orderId,
+        productId: productId,
         quantity: quantity
     })
     const navigate = useNavigate()
- 
+
 
     useEffect(() => {
         async function fetchSingleProduct() {
@@ -58,7 +58,7 @@ function SingleProduct({ token, email }) {
         fetchUser();
     }, [email, token]);
     console.log('user: ', user)
- 
+
     useEffect(() => {
         const fetchOrder = async () => {
             try {
@@ -113,7 +113,7 @@ function SingleProduct({ token, email }) {
                     Authorization: `Bearer ${token}`
                 }
             })
-             
+
         setIsInCart(true)
         } catch (error) {
             console.error(error)
@@ -141,9 +141,9 @@ function SingleProduct({ token, email }) {
             console.error("Error decreasing quantity:", error);
         }
     };
-    
+
     const increaseQuantity = async () => {
-        try { 
+        try {
             const newQuantity = quantity + 1;
             const { data } = await axios.put(`/api/cart/changeQuantity`, {
                 orderId: orderId,
@@ -160,9 +160,9 @@ function SingleProduct({ token, email }) {
         }
     };
 
-    
+
 const removeItem = async () => {
-    try { 
+    try {
             await axios.delete(`/api/cart/deleteCartItem`, {
                 data: {
                     orderId: orderId,
@@ -172,7 +172,7 @@ const removeItem = async () => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            setIsInCart(false); 
+            setIsInCart(false);
             setQuantity(1)
     } catch (error) {
         console.error(error);
@@ -187,9 +187,9 @@ const removeItem = async () => {
         return <>{error.message}</>;
     }
 
-    return ( 
+    return (
         <div className='wrapper'>
-            
+
             <div className= "content">
             <h3 className="single-description"> {product.description}</h3>
             <br></br>
@@ -202,10 +202,10 @@ const removeItem = async () => {
             <div className="sidebar">
             <img src={product.image} alt={product.name} />
             <h1 className ="header">{product.name}</h1>
-            
+
             </div>
-            
-            
+
+
             {token ? (
                 isInCart ?
                     <>
@@ -215,11 +215,11 @@ const removeItem = async () => {
                         <button className="removeItem" onClick={removeItem}>Remove</button>
                     </>
                     :
-                
+
                     <button className="footer" onClick={() => addToCart(productId, token)} type="button">Add to cart</button>
             ) : (
                 <button className="footer" onClick={() => navigate('/login')} type="button">Log in to Add to cart</button>
-                
+
             )}
         </div>
     );

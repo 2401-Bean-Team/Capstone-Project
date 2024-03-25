@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 
 import axios from "axios"
 import { Link } from 'react-router-dom'
+// import Lottie from "lottie-react";
+// import animationData from "./assets/AnimationCoffee.json"
 
 
 export default function AllProducts() {
@@ -20,7 +22,7 @@ export default function AllProducts() {
     return (
         <div >
 
-            <h1 className="allCoffeeCoffee">Coffee:</h1>
+           {/* <Lottie animationData={animationData}/> */}
             <div className="allCoffee">
             {coffee.map(c => (
                 <div key={c.id} className="coffee">

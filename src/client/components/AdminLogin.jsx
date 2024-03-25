@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const AdminLogin = ({ setToken, setName, name }) => {
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
@@ -35,7 +35,7 @@ const AdminLogin = ({ setToken, setName, name }) => {
         navigate('/adminpage'); // Redirect to the account page
       } else {
         throw result;
-      } 
+      }
       setPassword('');
     } catch (err) {
       console.error(`${err.name}: ${err.message}`);
@@ -48,12 +48,13 @@ const AdminLogin = ({ setToken, setName, name }) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className='adminlog'>
+      <h2> Admin Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='name'>Name:</label>
           <input
+                    placeholder='UserName'
+
             type='name'
             id='name'
             value={name}
@@ -62,8 +63,8 @@ const AdminLogin = ({ setToken, setName, name }) => {
           />
         </div>
         <div>
-          <label htmlFor='password'>Password:</label>
           <input
+          placeholder='Password'
             type='password'
             id='password'
             value={password}
@@ -71,7 +72,7 @@ const AdminLogin = ({ setToken, setName, name }) => {
             required
           />
         </div>
-        <button type='submit'>Login</button>
+        <button className='accBut' type='submit'>Login</button>
       </form>
       <p>{message}</p>
     </div>
