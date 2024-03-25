@@ -22,6 +22,7 @@ export default function ShoppingCart({ token, email }) {
     const [productsWithDetails, setProductsWithDetails] = useState([])
     const [checkedOut, setCheckedOut] = useState(false)
     const [error, setError] = useState(null)
+    const [cartTotal, setCartTotal] = useState(0)
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -104,6 +105,7 @@ export default function ShoppingCart({ token, email }) {
                 }));
                 console.log('products with details ', productsWithDetails)
                 setProductsWithDetails(productsWithDetails);
+                console.log('productswithdetails', productsWithDetails)
             } catch (error) {
                 setError(error);
             }
@@ -111,6 +113,23 @@ export default function ShoppingCart({ token, email }) {
     
         fetchProductsDetails();
     }, [products]);
+
+    useEffect(() => {
+      const fetchTotal = async () => {
+          try {  
+            let total = 0;
+              productsWithDetails.forEach((item) =>  {
+                  total += item.price * item.quantity
+              } );
+              console.log('cartTotal ', total)
+              setCartTotal(total)
+          } catch (error) {
+              setError(error);
+          }
+      };
+  
+      fetchTotal();
+  }, [productsWithDetails]);
 
     useEffect(() => { 
       return () => {
@@ -204,20 +223,29 @@ export default function ShoppingCart({ token, email }) {
         <div className="allCoffee">
           {productsWithDetails.map((product, index) => (
             <div key={`${product.id}-${index}`} className="cartItem">
+              <div className="image-text-section">
               <Link to={`/coffee/${product.id}`}>
                 <img src={product.image} alt={product.name} />
               </Link>
-              <h1>{product.name}</h1>
-              <h2>${product.price}</h2>
-              <h2>{product.roast}</h2>
-              <h2>Quantity: {product.quantity}</h2>
-              <button onClick={() => decreaseQuantity(product, index)}>-</button>
-              <button onClick={() => increaseQuantity(product, index)}>+</button>
-              <button onClick={() => removeItem(product, index)}>Remove</button> 
+              <div className="description">
+                <h1>{product.name}</h1>
+                <h2>${product.price}</h2>
+                <h2>{product.roast}</h2>
+              </div>
+              </div>
+              <div className="buttons-total-section">
+              <button className="decrease-button" onClick={() => decreaseQuantity(product, index)}>-</button>
+              <h2 className="Qty" >Qty: {product.quantity}</h2>
+              <button className="increase-button" onClick={() => increaseQuantity(product, index)}>+</button>
+              <button className="remove-button" onClick={() => removeItem(product, index)}>Remove</button> 
+              </div>
             </div>
           ))}
         </div>
-        <button onClick={handleCheckout}>Check Out</button>
+        <div className="total-checkout-section"> 
+          <h1>Total price: ${cartTotal}</h1>
+          <button className="checkout-button" onClick={handleCheckout}>Check Out</button>
+        </div>
       </div>
     );
   }

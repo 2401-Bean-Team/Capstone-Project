@@ -1,0 +1,253 @@
+.buttons-total-section {
+    display: flex;
+    justify-content: center;
+}
+
+.Qty {
+    margin: 10px;
+    align-self: center;
+}
+
+.remove-button {
+  margin-left: auto;
+}
+
+ 
+.decrease-button {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #373B44;
+  
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.decrease-button:hover,
+.decrease-button:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+.decrease-button:active {
+  background: var(--color);
+  color: #fff;
+}
+
+.increase-button {
+    --b: 3px;   /* border thickness */
+    --s: .45em; /* size of the corner */
+    --color: #373B44;
+    
+    padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+    color: var(--color);
+    --_p: var(--s);
+    background:
+      conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+      var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+    transition: .3s linear, color 0s, background-color 0s;
+    outline: var(--b) solid #0000;
+    outline-offset: .6em;
+    font-size: 16px;
+  
+    border: 0;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .increase-button:hover,
+  .increase-button:focus-visible{
+    --_p: 0px;
+    outline-color: var(--color);
+    outline-offset: .05em;
+  }
+  
+  .increase-button:active {
+    background: var(--color);
+    color: #fff;
+  }
+
+  .remove-button {
+    --b: 3px;   /* border thickness */
+    --s: .45em; /* size of the corner */
+    --color: #373B44;
+    
+    padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+    color: var(--color);
+    --_p: var(--s);
+    background:
+      conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+      var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+    transition: .3s linear, color 0s, background-color 0s;
+    outline: var(--b) solid #0000;
+    outline-offset: .6em;
+    font-size: 16px;
+  
+    border: 0;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .remove-button:hover,
+  .remove-button:focus-visible{
+    --_p: 0px;
+    outline-color: var(--color);
+    outline-offset: .05em;
+  }
+  
+  .remove-button:active {
+    background: var(--color);
+    color: #fff;
+  }
+
+  .checkout-button {
+    --b: 3px;   /* border thickness */
+    --s: .45em; /* size of the corner */
+    --color: #373B44;
+    
+    padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+    color: var(--color);
+    --_p: var(--s);
+    background:
+      conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+      var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+    transition: .3s linear, color 0s, background-color 0s;
+    outline: var(--b) solid #0000;
+    outline-offset: .6em;
+    font-size: 30px;
+  
+    border: 0;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+    
+  }
+  
+  .checkout-button:hover,
+  .checkout-button:focus-visible{
+    --_p: 0px;
+    outline-color: var(--color);
+    outline-offset: .05em;
+  }
+  
+  .checkout-button:active {
+    background: var(--color);
+    color: #fff;
+  }
+
+  .total-checkout-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    align-items: center;
+  }
+ 
+  
+  .allCoffee {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+ padding: 10px;
+
+ background-color: 	#CAC8C8;
+ padding: 2px;
+ border-radius: 25px;
+ border: 4px outset rgb(96, 96, 96);
+ padding: 20px;
+ margin: 5px;
+ animation: coffee .3s infinite linear;
+}
+.allCoffeeCoffee {
+  display: flex;
+  justify-content: center;
+
+}
+
+.cartItem {
+  --b: 3px;  
+  --s: .45em; 
+  --color: #50545c;
+
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 4px;
+  width: 450px;
+}
+  
+.cartItem img {
+    border: 4px solid rgb(215, 215, 215);
+  
+  align-content: center;
+    height: 200px;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .cartItem h1 {
+    position: relative;
+    font-family: "Ropa Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  font-size: 30px;
+    color: #3d3d3d;
+  }
+  .cartItem h2 {
+    position: relative;
+    font-family: "Ropa Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    color:#3d3d3d;
+  }
+ 
+  .description {
+    margin-left: 10px;  
+    flex: 1;   
+}
+
+.description h1,
+.description h2 {
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+.image-text-section {
+    display: flex;
+    align-items: center; /* Vertically center image and description */
+}
