@@ -121,8 +121,9 @@ export default function ShoppingCart({ token, email }) {
               productsWithDetails.forEach((item) =>  {
                   total += item.price * item.quantity
               } );
-              console.log('cartTotal ', total)
-              setCartTotal(total)
+              const formattedTotal = total.toFixed(2);
+               
+              setCartTotal(formattedTotal)
           } catch (error) {
               setError(error);
           }
