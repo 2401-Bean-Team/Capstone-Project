@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = ({ setToken, setEmail, email }) => {
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
@@ -37,7 +37,7 @@ const Login = ({ setToken, setEmail, email }) => {
         //navigate('/cart'); // Redirect to the account page
       } else {
         throw result;
-      } 
+      }
       setPassword('');
     } catch (err) {
       console.error(`${err.name}: ${err.message}`);
@@ -50,12 +50,13 @@ const Login = ({ setToken, setEmail, email }) => {
   };
 
   return (
-    <div>
+    <div className='adminlog' >
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor='email'>Email:</label>
           <input
+          placeholder='Email'
             type='email'
             id='email'
             value={email}
@@ -66,6 +67,8 @@ const Login = ({ setToken, setEmail, email }) => {
         <div>
           <label htmlFor='password'>Password:</label>
           <input
+                    placeholder='Password'
+
             type='password'
             id='password'
             value={password}
@@ -73,7 +76,7 @@ const Login = ({ setToken, setEmail, email }) => {
             required
           />
         </div>
-        <button type='submit'>Login</button>
+        <button className='butto' type='submit'>Login</button>
       </form>
       <p>{message}</p>
     </div>

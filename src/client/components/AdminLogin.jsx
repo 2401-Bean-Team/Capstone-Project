@@ -72,7 +72,7 @@ const AdminLogin = ({ setToken, setName, name }) => {
             required
           />
         </div>
-        <button className='accBut' type='submit'>Login</button>
+        <button className='butto' type='submit'>Login</button>
       </form>
       <p>{message}</p>
     </div>

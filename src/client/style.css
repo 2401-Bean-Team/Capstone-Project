@@ -10,7 +10,7 @@
 .App {
 
   height: 100%;
-  background-color: #dadada;
+  background-color: #b5b5b5;
 }
 
 .App-header {
@@ -27,8 +27,8 @@
 /* NAVBAR */
 .logo {
   height: 100px;
-  background-color:#fff;
-  border:1px solid rgb(245, 132, 132);
+  background-color:#b1b2b3;
+  border:1px solid rgb(120, 120, 120);
   height:100px;
   border-radius:50%;
   justify-self: center;
@@ -49,13 +49,14 @@ text-decoration: none;
 }
 
 .NAVBAR {
-  background-color: #c8752294;
+  background-color: #f6cba094;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 2px;
     grid-row-gap: 0px;
-
+padding-top: 20px;
+padding-bottom: 20px;
 }
 
 #menuToggle
@@ -113,7 +114,7 @@ text-decoration: none;
   margin-bottom: 5px;
   position: relative;
 
-  background: #cdcdcd;
+  background: #000000;
   border-radius: 3px;
 
   z-index: 1;
@@ -164,9 +165,10 @@ text-decoration: none;
 #menu
 {
   position: absolute;
-  width: 3000px;
+  width: 150px;
+  height: 1000px;
   margin: -100px 0 0 -50px;
-  padding: 50px;
+  padding: 35px;
   padding-top: 125px;
 
   background: #ededed;
@@ -199,12 +201,12 @@ ALLPRODUCTS CSS */
   flex-wrap: wrap;
  padding: 10px;
 
- background-color: #ede4dc;
+ background-color: 	#CAC8C8;
  padding: 2px;
-  border-radius: 25px;
-  border: 4px ridge rgb(238, 213, 170);
-  padding: 20px;
-  margin: 5px;
+ border-radius: 25px;
+ border: 4px outset rgb(96, 96, 96);
+ padding: 20px;
+ margin: 5px;
  animation: coffee .3s infinite linear;
 }
 .allCoffeeCoffee {
@@ -216,7 +218,7 @@ ALLPRODUCTS CSS */
 .coffee {
   --b: 3px;   /* border thickness */
   --s: .45em; /* size of the corner */
-  --color: #373B44;
+  --color: #50545c;
 
   padding: calc(.5em + var(--s)) calc(.9em + var(--s));
   color: var(--color);
@@ -235,6 +237,7 @@ ALLPRODUCTS CSS */
   -webkit-user-select: none;
   touch-action: manipulation;
   margin: 4px;
+  width: 250px;
 }
 
 
@@ -268,7 +271,7 @@ transition-duration: 350ms;
 
 
 .coffee img {
-  border: 4px solid burlywood;
+  border: 4px solid rgb(215, 215, 215);
 
 align-content: center;
   height: 200px;
@@ -284,7 +287,7 @@ a {
   font-weight: 400;
   font-style: normal;
 font-size: 30px;
-  color: #634832;
+  color: #3d3d3d;
 }
 .coffee h2 {
   position: relative;
@@ -292,7 +295,7 @@ font-size: 30px;
   font-weight: 400;
   font-style: normal;
   font-size: 24px;
-  color:#634832;
+  color:#3d3d3d;
 }
 
 
@@ -398,12 +401,12 @@ margin-left: 15px;
 
   /* account */
   .account {
-background-color: chartreuse;
+background-color: #CAC8C8;
 font-family: "Ropa Sans", sans-serif;
   font-weight: 400;
   font-style: normal;
   border-radius: 25px;
-  border: 4px ridge rgb(238, 213, 170);
+  border: 4px ridge rgb(168, 168, 168);
   padding: 20px;
   margin: 5px;
   display: flex;
@@ -412,19 +415,19 @@ font-family: "Ropa Sans", sans-serif;
 }
 
 .account h1{
-  color: #d41818;
+  color: #3d3d3d;
   justify-self: center;
   margin: 10px;
   font-size: 40px;
 }
 .account h3{
-  color: #598298;
+  color: #3d3d3d;
   margin: 7px;
   font-size: 25px;
 
 }
 .account h4{
-  color: #48ba4e;
+  color: #3d3d3d;
   margin-bottom: 17px;
   font-size: 25px;
 
@@ -432,7 +435,7 @@ font-family: "Ropa Sans", sans-serif;
 .accBut {
   --b: 3px;   /* border thickness */
   --s: .45em; /* size of the corner */
-  --color: #373B44;
+  --color: #3d3d3d;
 
   padding: calc(.5em + var(--s)) calc(.9em + var(--s));
   color: var(--color);
@@ -514,4 +517,40 @@ margin-bottom: 10px;
       outline: 2px solid #0f62fe;
       outline-offset: -2px;
   }
+}
+
+.butto {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #000000;
+
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+.accBut:hover,
+.accBut:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+.accBut:active {
+  background: var(--color);
+  color: #fff;
 }

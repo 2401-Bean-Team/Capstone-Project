@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Register = ({ setToken, token, setEmail, email }) => {
-  const [name, setName] = useState('') 
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState(''); 
+  const [message, setMessage] = useState('');
 
 
       const fetchUserData = async (email, token) => {
-        
+
         try {
           const { data } = await axios.get(`/api/users/me?email=${email}`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          console.log("USER DATA", data.user); 
+          console.log("USER DATA", data.user);
           createOrder(data.user.id, token)
         } catch (error) {
           console.error("Error fetching user data:", error);
@@ -24,14 +24,14 @@ const Register = ({ setToken, token, setEmail, email }) => {
 
 
   const createOrder = async (userId, token)=> {
-    
+
     await axios.post(`/api/orders/newOrder/${userId}`, {}, {
       headers: {
-        Authorization: `Bearer ${token}` 
+        Authorization: `Bearer ${token}`
       }
-    }); 
+    });
   }
- 
+
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -51,7 +51,7 @@ const Register = ({ setToken, token, setEmail, email }) => {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
-            }, 
+            },
             body: JSON.stringify({
                 name,
                 email,
@@ -65,8 +65,8 @@ const Register = ({ setToken, token, setEmail, email }) => {
         fetchUserData(email, result.token)
         if(!response.ok) {
           throw(result)
-        }   
-        setName(''); 
+        }
+        setName('');
         setPassword('');
     } catch (err) {
         console.error(`${err.name}: ${err.message}`);
@@ -79,17 +79,19 @@ const Register = ({ setToken, token, setEmail, email }) => {
   };
 
 
-  
+
 
 
   return (
-    <div>
-      
+    <div className='adminlog' >
+
       <form onSubmit={handleSubmit}>
       <h2>Register</h2>
       <div>
           <label htmlFor="name">Name:</label>
           <input
+                     placeholder='Name'
+
             type="text"
             id="name"
             value={name}
@@ -99,6 +101,8 @@ const Register = ({ setToken, token, setEmail, email }) => {
         <div>
           <label htmlFor="email">Email:</label>
           <input
+                    placeholder='Email'
+
             type="text"
             id="email"
             value={email}
@@ -108,13 +112,16 @@ const Register = ({ setToken, token, setEmail, email }) => {
         <div>
           <label htmlFor="password">Password:</label>
           <input
+           placeholder='Password'
+
             type="text"
             id="password"
             value={password}
             onChange={handlePasswordChange}
           />
         </div>
-        <button type="submit">Register</button>
+        <button
+        className='butto' type="submit">Register</button>
       </form>
       <p>{message}</p>
     </div>
