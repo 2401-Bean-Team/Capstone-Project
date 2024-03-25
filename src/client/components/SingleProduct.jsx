@@ -188,41 +188,42 @@ const removeItem = async () => {
     }
 
     return (
-        <div className='wrapper'>
-
-            <div className= "content">
-            <h3 className="single-description"> {product.description}</h3>
-            <br></br>
+        <div className='sincontan'>
+<div className="slightlybiggercon">
+            <div className= "con">
+            <img className='sinimg' src={product.image} alt={product.name} />
             <h3>Price: ${product.price}</h3>
-            <br></br>
-            <div className="price">
+            <div className="sinprice">
             <h3>Roast: {product.roast} </h3>
             </div>
             </div>
-            <div className="sidebar">
-            <img src={product.image} alt={product.name} />
-            <h1 className ="header">{product.name}</h1>
+            <div className="sinsidebar">
+            <h1 className ="sinheader">{product.name}</h1>
+            <h3 className="single"> {product.description}</h3>
 
             </div>
-
-
+<div className="sinbutt">
             {token ? (
                 isInCart ?
-                    <>
-                        <h3>quantity: {quantity}</h3>
-                        <button className="decreaseQuantity" onClick={decreaseQuantity}>-</button>
-                        <button className="increaseQuantity" onClick={increaseQuantity}>+</button>
-                        <button className="removeItem" onClick={removeItem}>Remove</button>
-                    </>
+                    <div className="sincartfoot">
+                        <button className="foote" onClick={decreaseQuantity}>-</button>
+                        <h3 className="foote">QTY {quantity}</h3>
+
+                        <button className="foote" onClick={increaseQuantity}>+</button>
+
+<button className="foote" onClick={removeItem}>Remove</button>
+                    </div>
                     :
 
-                    <button className="footer" onClick={() => addToCart(productId, token)} type="button">Add to cart</button>
+                    <button className="foote" onClick={() => addToCart(productId, token)} type="button">Add to cart</button>
             ) : (
-                <button className="footer" onClick={() => navigate('/login')} type="button">Log in to Add to cart</button>
+                <button className="foote" onClick={() => navigate('/login')} type="button">Log in to Add to cart</button>
 
             )}
-        </div>
+
+        </div></div></div>
     );
+
 }
 
 export default SingleProduct;

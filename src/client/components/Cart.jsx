@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react" 
+import { useState, useEffect } from "react"
 import axios from "axios"
-import { useNavigate, NavLink } from "react-router-dom"; 
+import { useNavigate, NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import '../cart.css'
 
@@ -38,7 +38,7 @@ export default function ShoppingCart({ token, email }) {
                 setError(error);
             }
         };
-    
+
         fetchUser();
     }, [email, token]);
     console.log('user: ', user)
@@ -46,7 +46,7 @@ export default function ShoppingCart({ token, email }) {
         const fetchOrder = async () => {
           try {
             if (!user) return; // Exit if user is not defined yet
-    
+
             const { data } = await axios.get(`/api/orders/${user.id}`,
               {
                 headers: {
@@ -62,15 +62,15 @@ export default function ShoppingCart({ token, email }) {
             setError(error);
           }
         };
-    
+
         fetchOrder();
       }, [user, token]);
 
       useEffect(() => {
         const fetchProducts = async () => {
             try {
-              if (!orderId) return; 
-      
+              if (!orderId) return;
+
               const { data } = await axios.get(`/api/cart/${orderId}`,
                 {
                   headers: {
@@ -78,22 +78,22 @@ export default function ShoppingCart({ token, email }) {
                   }
                 }
               );
-               
+
                   console.log('order products: ',data)
                   setProducts(data)
             } catch (error) {
               setError(error);
             }
           };
-      
+
           fetchProducts();
       }, [orderId, token])
 
       useEffect(() => {
         const fetchProductsDetails = async () => {
             try {
-                if (!products.length) return; 
-    
+                if (!products.length) return;
+
                 const productIds = products.map(product => product.productId);
                 console.log('product ids', productIds);
                 const productDetails = await Promise.all(productIds.map(productId => axios.get(`/api/products/${productId}`)));
@@ -110,13 +110,13 @@ export default function ShoppingCart({ token, email }) {
                 setError(error);
             }
         };
-    
+
         fetchProductsDetails();
     }, [products]);
 
     useEffect(() => {
       const fetchTotal = async () => {
-          try {  
+          try {
             let total = 0;
               productsWithDetails.forEach((item) =>  {
                   total += item.price * item.quantity
@@ -127,11 +127,11 @@ export default function ShoppingCart({ token, email }) {
               setError(error);
           }
       };
-  
+
       fetchTotal();
   }, [productsWithDetails]);
 
-    useEffect(() => { 
+    useEffect(() => {
       return () => {
         setCheckedOut(false);
       };
@@ -153,7 +153,7 @@ export default function ShoppingCart({ token, email }) {
       });
       }
     };
-  
+
     const increaseQuantity = async (product, index) => {
       const newProducts = [...productsWithDetails];
       newProducts[index].quantity++;
@@ -168,7 +168,7 @@ export default function ShoppingCart({ token, email }) {
         }
     });
     };
-  
+
     const removeItem = async (product, index) => {
       const newProducts = productsWithDetails.filter((_, idx) => idx !== index);
       setProductsWithDetails(newProducts);
@@ -204,16 +204,16 @@ export default function ShoppingCart({ token, email }) {
 
     if(products.length  === 0){
       return (
-        <div className="cartEmpty"> 
-        <h1>Hey, friend your cart is empty or we f*cked up -<Link to="/" > Browse coffee here!</Link></h1>  
+        <div className="cartEmpty">
+        <h1>Hey, friend your cart is empty or we f*cked up -<Link className="carte" to="/" > Browse coffee here!</Link></h1>
         </div>
       )}
 
     if(checkedOut) {
       return (
-      <div className="checkedOut"> 
-      <h1>Order complete! You will never receive this coffee, but you also payed nothing for it.</h1> 
-      <Link to="/" >Shop for more</Link>
+      <div className="checkedOut">
+      <h1>Order complete! You will never receive this coffee, but you also payed nothing for it.</h1>
+      <Link className='checkbutt' to="/" >Shop for more</Link>
       </div>
     )}
 
@@ -237,16 +237,15 @@ export default function ShoppingCart({ token, email }) {
               <button className="decrease-button" onClick={() => decreaseQuantity(product, index)}>-</button>
               <h2 className="Qty" >Qty: {product.quantity}</h2>
               <button className="increase-button" onClick={() => increaseQuantity(product, index)}>+</button>
-              <button className="remove-button" onClick={() => removeItem(product, index)}>Remove</button> 
+              <button className="remove-button" onClick={() => removeItem(product, index)}>Remove</button>
               </div>
             </div>
           ))}
         </div>
-        <div className="total-checkout-section"> 
+        <div className="total-checkout-section">
           <h1>Total price: ${cartTotal}</h1>
           <button className="checkout-button" onClick={handleCheckout}>Check Out</button>
         </div>
       </div>
     );
   }
- 
