@@ -193,7 +193,7 @@ const removeItem = async () => {
             <div className= "content">
             <h3 className="single-description"> {product.description}</h3>
             <br></br>
-            <h3>Price: {product.price}</h3>
+            <h3>Price: ${product.price}</h3>
             <br></br>
             <div className="price">
             <h3>Roast: {product.roast} </h3>
