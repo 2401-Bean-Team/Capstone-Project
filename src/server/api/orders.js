@@ -30,22 +30,22 @@ orderRouter.get('/:userId', async (req, res, next) => {
 
   orderRouter.post('/newOrder/:userId', async (req, res, next) => {
     try {
-        const userId = req.params.userId 
+        const userId = req.params.userId
 
-        const newOrder = await createOrder({ 
-            userId: userId, 
-            address: '', 
+        const newOrder = await createOrder({
+            userId: userId,
+            address: '',
             status: true
         });
         res.send(newOrder)
     } catch (error) {
-       next(error) 
+       next(error)
     }
   })
 
   orderRouter.put('/:orderId/changeAddress', async (req, res, next) => {
     try {
-        const orderId = req.params.orderId; 
+        const orderId = req.params.orderId;
         const {  address } = req.body;
 
         const order = await getCart({ userId });
@@ -65,7 +65,7 @@ orderRouter.get('/:userId', async (req, res, next) => {
 
   orderRouter.put('/:orderId/changeStatus', async (req, res, next) => {
     try {
-        const orderId = req.params.orderId;  
+        const orderId = req.params.orderId;
 
             let updatedOrder = await updateStatus(
                 orderId,

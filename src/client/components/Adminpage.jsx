@@ -132,7 +132,9 @@ function Adminpage({ token, setToken }) {
             return <div>Loading...</div>; // Render loading indicator
     }
     if (!token) {
-        return <h1>Logged out, please log in as an admin here: <NavLink to='/admin'>Admin Login</NavLink></h1>
+        return <div className="logout">
+        <h1 className="d">Logged out, please log in as an admin here: <NavLink to='/admin'>Admin Login</NavLink></h1>
+        </div>
     }
     return (
         <div >

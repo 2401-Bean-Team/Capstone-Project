@@ -726,10 +726,10 @@ font-size: 30px;
 }
 .sinimg{
   height:250px;
-  border-radius: 25px; 
+  border-radius: 25px;
   margin-bottom: 15px;
 }
- 
+
 .name-description-container{
 
 display: flex;
@@ -766,7 +766,7 @@ justify-content: center;
 display: flex;
 }
 
- 
+
 .foote h3 {
  cursor:default
 }
@@ -775,7 +775,7 @@ display: flex;
   display: flex;
   justify-content: space-around;
   width: 100%;
-  max-width: 1000px; 
+  max-width: 1000px;
 }
 
 .single-price-roast {
@@ -893,12 +893,12 @@ display: flex;
     color: #fff;
   }
 /* --------------------------------- */
-  
+
 .add-to-cart-button {
   --b: 3px;   /* border thickness */
   --s: .45em; /* size of the corner */
   --color: #373B44;
-  
+
   padding: calc(.5em + var(--s)) calc(.9em + var(--s));
   color: var(--color);
   --_p: var(--s);
@@ -928,7 +928,7 @@ display: flex;
   background: var(--color);
   color: #fff;
 }
- 
+
 
 .button-container {
   display: flex;
@@ -950,7 +950,7 @@ display: flex;
   margin-left: auto;
 }
 
- 
+
 
 .add-to-cart-button {
   font-size: 20px;
@@ -958,3 +958,13 @@ display: flex;
   padding-right: 150px;
   margin-top: 50px;
 }
+
+.logout{
+  justify-content: center;
+  display: flex;
+  margin-top: 100px;
+  margin-bottom: 400px;
+}
+ .outlog{
+  margin:2px;
+ }
