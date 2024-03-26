@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import '../singleitem.css';
+
 
 
 import axios from 'axios'
