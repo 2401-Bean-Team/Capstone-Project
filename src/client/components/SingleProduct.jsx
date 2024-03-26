@@ -223,6 +223,9 @@ const removeItem = async () => {
         </div>
         </div>
         </div>
+        <div className="return-to-products-container">
+            <button className="return-to-products-button" onClick={() => navigate('/')} >Return to all products</button>
+        </div>
     </div> 
     );
 

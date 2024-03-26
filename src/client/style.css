@@ -11,11 +11,12 @@
 
   height: 100%;
   background-color: #b5b5b5;
+  background: linear-gradient(180deg, #b1b2b3 100%, #f6cba094 70%);
 }
 
 .App-header {
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 24px; 
 }
 
 #comp-img{
@@ -51,6 +52,7 @@ text-decoration: none;
 
 .NAVBAR {
   background-color: #f6cba094;
+  background: linear-gradient(180deg, #f6cba094 50%, #b1b2b3 100%);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
@@ -58,6 +60,7 @@ text-decoration: none;
     grid-row-gap: 0px;
 padding-top: 20px;
 padding-bottom: 20px;
+height: 200px;
 }
 
 #menuToggle
@@ -720,9 +723,10 @@ font-size: 30px;
   margin: 10px;
   padding: 10px;
   display:flex;
-  justify-content: center;
-  margin-bottom: 100px;
+  align-items: center;
+  margin-bottom: 60px;
   margin-top: 100px;
+  flex-direction: column;
 }
 .sinimg{
   height:250px;
@@ -774,6 +778,7 @@ display: flex;
 .image-details-container {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
   max-width: 1000px; 
 }
@@ -954,7 +959,56 @@ display: flex;
 
 .add-to-cart-button {
   font-size: 20px;
-  padding-left: 150px;
-  padding-right: 150px;
+  width: 100%;
+  max-width: 530px;
   margin-top: 50px;
+}
+
+ 
+.return-to-products-button {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #373B44;
+  
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.return-to-products-button:hover,
+.return-to-products-button:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+.return-to-products-button:active {
+  background: var(--color);
+  color: #fff;
+}
+
+.return-to-products-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px; 
+  width: 100%;  
+}
+
+.return-to-products-button {
+  font-size: 20px; 
+  width: 100%;
+  max-width: 950px;   
 }
