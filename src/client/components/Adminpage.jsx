@@ -179,7 +179,7 @@ function Adminpage({ token, setToken }) {
                     </form>
                     </div>
                     <div className="admincontain">
-                <label>Editproduct:</label>
+                <label>Edit product:</label>
             <form className='adminin'
             onSubmit = {handleEdit}>
                             <input
