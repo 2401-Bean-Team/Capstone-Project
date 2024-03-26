@@ -188,40 +188,42 @@ const removeItem = async () => {
     }
 
     return (
-        <div className='sincontan'>
-<div className="slightlybiggercon">
-            <div className= "con">
-            <img className='sinimg' src={product.image} alt={product.name} />
-            <h3>Price: ${product.price}</h3>
-            <div className="sinprice">
-            <h3>Roast: {product.roast} </h3>
+    <div className='sincontan'>
+        <div className="image-details-container">
+            <div className= "image-price-roast">
+                <img className='sinimg' src={product.image} alt={product.name} />
+                <h3 className="single-price-roast" >Price: ${product.price}</h3> 
+                <h3 className="single-price-roast" >Roast: {product.roast} </h3> 
             </div>
-            </div>
-            <div className="sinsidebar">
-            <h1 className ="sinheader">{product.name}</h1>
-            <h3 className="single"> {product.description}</h3>
+            <div className="name-description-container">
+                <h1 className ="sinheader">{product.name}</h1>
+                <h3 className="single-description"> {product.description}</h3>
 
-            </div>
-<div className="sinbutt">
+             
+         
+        <div className="button-container">
             {token ? (
                 isInCart ?
-                    <div className="sincartfoot">
-                        <button className="foote" onClick={decreaseQuantity}>-</button>
-                        <h3 className="foote">QTY {quantity}</h3>
+                    <div className="in-cart-buttons">
+                        <button className="decrease-in-cart" onClick={decreaseQuantity}>-</button>
+                        <h3 className="Qty">Qty: {quantity}</h3>
 
-                        <button className="foote" onClick={increaseQuantity}>+</button>
+                        <button className="increase-in-cart" onClick={increaseQuantity}>+</button>
 
-<button className="foote" onClick={removeItem}>Remove</button>
+                        <button className="remove-from-cart" onClick={removeItem}>Remove</button>
                     </div>
                     :
 
-                    <button className="foote" onClick={() => addToCart(productId, token)} type="button">Add to cart</button>
+                    <button className="add-to-cart-button" onClick={() => addToCart(productId, token)} type="button">Add to cart</button>
             ) : (
-                <button className="foote" onClick={() => navigate('/login')} type="button">Log in to Add to cart</button>
+                <button className="add-to-cart-button" onClick={() => navigate('/login')} type="button">Log in to Add to cart</button>
 
             )}
 
-        </div></div></div>
+        </div>
+        </div>
+        </div>
+    </div> 
     );
 
 }
