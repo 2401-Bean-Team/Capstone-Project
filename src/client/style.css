@@ -964,6 +964,8 @@ display: flex;
   display: flex;
   margin-top: 100px;
   margin-bottom: 400px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
  .outlog{
   margin:2px;
