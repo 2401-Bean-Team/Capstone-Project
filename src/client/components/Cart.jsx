@@ -122,7 +122,7 @@ export default function ShoppingCart({ token, email }) {
                   total += item.price * item.quantity
               } );
               const formattedTotal = total.toFixed(2);
-               
+
               setCartTotal(formattedTotal)
           } catch (error) {
               setError(error);
@@ -200,8 +200,8 @@ export default function ShoppingCart({ token, email }) {
 
 
     if (!user) {
-        return <h1>Hey, friend you're logged out - please <NavLink to='/login'>Login</NavLink> or <NavLink to='/register'>Register</NavLink></h1>
-    }
+        return <div className="logout"><h1>Hey, friend you're logged out - please <NavLink to='/login'>Login</NavLink> or <NavLink to='/register'>Register</NavLink></h1>
+    </div>}
 
     if(products.length  === 0){
       return (
