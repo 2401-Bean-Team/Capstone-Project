@@ -3,8 +3,10 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 export default function AllProducts() {
     const [coffee, setCoffee] = useState([]);
-    const [searchInput, setSearchInput] = useState('');
+    const [searchInput, setSearchInput] = useState(''); 
+    const [filterInput, setFilterInput] = useState(''); 
     const [filteredCoffees, setFilteredCoffees] = useState([]);
+    const [roastFilteredCoffees, setRoastFilteredCoffees] = useState([]);
     const [error, setError] = useState('');
     useEffect(() => {
         async function fetchCoffee() {
@@ -17,19 +19,36 @@ export default function AllProducts() {
             }
         }
         fetchCoffee();
-    }, []);
-    // Search handler function
+    }, []); 
+    const filterHandler = (event) => {
+        const searchTerm = event.target.value.toLowerCase(); 
+        setFilterInput(searchTerm);
+    };
+
     const searchHandler = (event) => {
         const searchTerm = event.target.value.toLowerCase();
         setSearchInput(searchTerm);
+
         const filteredCoffees = coffee.filter(product =>
-            product.name.toLowerCase().includes(searchTerm) ||
-            product.roast.toLowerCase().includes(searchTerm)
+            (product.name.toLowerCase().includes(searchTerm) ||
+            product.roast.toLowerCase().includes(searchTerm)) &&
+            (filterInput === '' || product.roast.toLowerCase() === filterInput)
         );
         setFilteredCoffees(filteredCoffees);
     };
+
+    // Filtered coffees state 
+
+    useEffect(() => {
+        // Apply initial filter on component mount
+        const initialFilteredCoffees = coffee.filter(product =>
+            filterInput === '' || product.roast.toLowerCase() === filterInput
+        );
+        setFilteredCoffees(initialFilteredCoffees);
+    }, [coffee, filterInput]);
+
     return (
-        <div className = 'search-bar-container' >
+        <div className='search-bar-container'>
             <div id='search-bar'>
                 <label>
                     Search Coffee:
@@ -39,10 +58,19 @@ export default function AllProducts() {
                         value={searchInput}
                         onChange={searchHandler} />
                 </label>
+                <label>Filter by Roast 
+                <select onChange={filterHandler}>
+                    <option value="">All</option>
+                    <option value="Dark" >Dark</option> 
+                    <option value="Medium/Dark" >Medium/Dark</option>
+                    <option value="Medium">Medium</option> 
+                    <option value="Light/Medium">Light/Medium</option>
+                    <option value="Light">Light</option>
+                </select>
+                </label>
             </div>
             {error && <div>Error: {error}</div>}
         
-    
             <div className="allCoffee">
                 {filteredCoffees.map(c => (
                     <div key={c.id} className="coffee">
@@ -54,8 +82,8 @@ export default function AllProducts() {
                         </Link>
                     </div>
                 ))}    
-         </div>
-    </div>     
+            </div>
+        </div>     
     );
 }
 
