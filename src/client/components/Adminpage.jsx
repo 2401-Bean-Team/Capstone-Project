@@ -138,13 +138,13 @@ function Adminpage({ token, setToken }) {
     }
     return (
         <div >
-            <button className="accBut" onClick={logOut}><NavLink to="/"></NavLink>Log Out</button>
+            <button className="logOutButton" onClick={logOut}><NavLink to="/"></NavLink>Log Out</button>
 
-            <h1 className="allCoffeeCoffee">Coffee:</h1>
-            <div className="allCoffee">
-                <div className="admincontain">
+            <h1 className="adminHeader">Coffee:</h1>
+            <div className="add-edit-productsAdminContainer">
+                <div className="adminAddContainer">
             <label>Add Product:</label>
-            <form className='adminin' onSubmit = {handlePost}>
+            <form className='admin-add-editForm' onSubmit = {handlePost}>
 
                             <input
                             placeholder="Name"
@@ -180,9 +180,9 @@ function Adminpage({ token, setToken }) {
                             <input type="submit" value="Submit" />
                     </form>
                     </div>
-                    <div className="admincontain">
+                    <div className="adminEditContainer">
                 <label>Edit product:</label>
-            <form className='adminin'
+            <form className='admin-add-editForm'
             onSubmit = {handleEdit}>
                             <input
                             placeholder="ID"
@@ -224,9 +224,9 @@ function Adminpage({ token, setToken }) {
                             <input type="submit" value="Submit" />
                     </form>
                     </div>
-                    <div className="justallcoffee">
+                    <div className="adminAllProductsContainer">
             {coffee.map(c => (
-                <div key={c.id} className="justcoffee">
+                <div key={c.id} className="adminSingleProductView ">
 
                         <img src={c.image} alt={c.name} />
                         <h1>ID: {c.id}</h1>
@@ -240,11 +240,11 @@ function Adminpage({ token, setToken }) {
             ))}
             </div>
             </div>
-                <div className="userListcoffee">
-            <h1 className="list">User List:</h1>
-            <div className="allList">
+                <div className="usersListContainer">
+            <h1 className="usersListHeader">User List:</h1>
+            <div className="allUsersList">
             {list.map(c => (
-                <div key={c.id} className="list">
+                <div key={c.id} className="user">
 
 
                         <h1>{c.name}</h1>

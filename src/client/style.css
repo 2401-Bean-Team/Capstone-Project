@@ -44,7 +44,7 @@ list-style-type: none;
 text-decoration: none;
 
 }
-.icon{
+.shoppingCartIcon {
   justify-self: end;
   margin-right: 50px;
   margin-top: 12px;
@@ -63,6 +63,7 @@ padding-bottom: 20px;
 height: 200px;
 }
 
+/* nav bar menu button code*/
 #menuToggle
 {
   display: block;
@@ -199,7 +200,7 @@ height: 200px;
 ALLPRODUCTS CSS */
 
 
-.allCoffee {
+.add-edit-productsAdminContainer {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -213,7 +214,7 @@ ALLPRODUCTS CSS */
  margin: 5px;
  animation: coffee .3s infinite linear;
 }
-.allCoffeeCoffee {
+.adminHeader {
   display: flex;
   justify-content: center;
 
@@ -316,7 +317,7 @@ grid-row-gap: 6px;
   background-color: #232323;
 }
 
-.footTitle{
+.footerTitleLink{
   color: rgb(26, 160, 160);
 font-size: 35px;
 position: relative;
@@ -327,7 +328,7 @@ margin-left: 7px;
 margin-bottom: 7px;
 
   }
-  .footProduct{
+  .footerProductsLink{
     color: aqua;
 
 margin-top: 100px;
@@ -345,7 +346,7 @@ padding: 2px;
   font-size: 25px;
   text-align: center;
     }
-    .footAccount{
+    .footerAccountLink{
       color: aqua;
 margin-left: 2px;
 margin-top: 10px;
@@ -363,7 +364,7 @@ padding: 15px;
   text-align: center;
       }
 
-      .footAdmin{
+      .footerAdminLink{
         color: aqua;
         margin-left: 2px;
         margin-bottom: 25px;
@@ -383,7 +384,7 @@ position: relative;
 
 
 
-.media {
+.mediaIcon {
 width: 50px;
   background-color:#fff;
   border:1px solid rgb(0, 0, 0);
@@ -391,7 +392,7 @@ width: 50px;
   border-radius:50%;
 }
 
-.footlogo{
+.footerLogoContainer{
   background-color:#fff;
   border:1px solid rgb(27, 27, 27);
 
@@ -436,7 +437,7 @@ font-family: "Ropa Sans", sans-serif;
   font-size: 25px;
 
 }
-.accBut {
+.logOutButton {
   --b: 3px;   /* border thickness */
   --s: .45em; /* size of the corner */
   --color: #3d3d3d;
@@ -460,32 +461,26 @@ font-family: "Ropa Sans", sans-serif;
 }
 
 
-.accBut:hover,
-.accBut:focus-visible{
+.logOutButton:hover,
+.logOutButton:focus-visible{
   --_p: 0px;
   outline-color: var(--color);
   outline-offset: .05em;
 }
 
-.accBut:active {
+.logOutButton:active {
   background: var(--color);
   color: #fff;
 }
 
-.outlog{
-  display: flex;
-  justify-content: center;
-
-
-
-}
+/* i think we can delete this...*/
 .out{
   padding: 100px;
   padding-bottom: 450px;
 }
 
-/* admin */
-.adminlog{
+/*login css*/
+.loginContainer {
   justify-content: center;
   display: flex;
   margin: 100px;
@@ -493,11 +488,11 @@ font-family: "Ropa Sans", sans-serif;
   text-align: center;
 font-size: 30px;
 }
-.adminlog h2 {
-  text-align: center;
-}
 
-.adminlog input{
+/* login form styling 
+p.s. can copy and past edit classname to be more specific
+for register component */
+.loginContainer input{
   box-sizing: border-box;
   font-family: inherit;
   font-size: 14px;
@@ -523,7 +518,52 @@ margin-bottom: 10px;
   }
 }
 
-.butto {
+.loginContainer h2 {
+  text-align: center;
+}
+
+/* admin login */
+.adminLoginContainer {
+  justify-content: center;
+  display: flex;
+  margin: 100px;
+  flex-direction: column;
+  text-align: center;
+font-size: 30px;
+}
+
+.adminLoginContainer h2 {
+  text-align: center;
+}
+
+/* admin login form styling */
+.adminLoginContainer input{
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
+  vertical-align: baseline;
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: .16px;
+  border-radius: 0;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid #8d8d8d;
+  background-color:#dadada;
+  padding: 0 16px;
+  color: #161616;
+  transition: background-color 70ms cubic-bezier(.2,0,.38,.9),outline 70ms cubic-bezier(.2,0,.38,.9);
+margin-bottom: 10px;
+  :focus{
+      outline: 2px solid #0f62fe;
+      outline-offset: -2px;
+  }
+}
+
+.loginButton {
   --b: 3px;   /* border thickness */
   --s: .45em; /* size of the corner */
   --color: #000000;
@@ -547,36 +587,42 @@ margin-bottom: 10px;
 }
 
 
-.accBut:hover,
-.accBut:focus-visible{
+.logOutButton:hover,
+.logOutButton:focus-visible{
   --_p: 0px;
   outline-color: var(--color);
   outline-offset: .05em;
 }
 
-.accBut:active {
+.logOutButton:active {
   background: var(--color);
   color: #fff;
 }
 
-.admincontain{
+.adminAddContainer{
   border: 4px ridge rgb(168, 168, 168);
 margin-bottom: 10px;
 }
-.adminin{
+
+.adminEditContainer{
+  border: 4px ridge rgb(168, 168, 168);
+margin-bottom: 10px;
+}
+
+.admin-add-editForm{
   justify-content: center;
   display: flex;
   flex-direction: row;
   text-align: center;
   flex-wrap: wrap;
 }
-.admincontain .adminin input{
+.admincontain .admin-add-editForm input{
   padding-right: 15px;
   margin: 10px;
 }
 
 
-.adminin input{
+.admin-add-editForm input{
   box-sizing: border-box;
   font-family: inherit;
   font-size: 14px;
@@ -609,8 +655,8 @@ margin-bottom: 10px;
   display: flex;
 }
 
-.justallcoffee{
-  border: 4px ridge rgb(168, 168, 168);
+.adminAllProductsContainer{ 
+border: 4px ridge rgb(168, 168, 168);
 margin: 5px;
 flex-direction: row;
 display: flex;
@@ -618,8 +664,7 @@ flex-wrap: wrap;
 justify-content: center;
 }
 
-
-.justcoffee {
+.adminSingleProductView {
   --b: 3px;   /* border thickness */
   --s: .45em; /* size of the corner */
   --color: #50545c;
@@ -682,7 +727,7 @@ justify-content: center;
   }
 }
 
-.justcoffee img {
+.adminSingleProductView img {
   border: 4px solid rgb(215, 215, 215);
 
 align-content: center;
@@ -693,7 +738,7 @@ a {
   text-decoration: none;
 }
 
-.justcoffee h1 {
+.adminSingleProductView h1 {
   position: relative;
   font-family: "Ropa Sans", sans-serif;
   font-weight: 400;
@@ -701,7 +746,7 @@ a {
 font-size: 30px;
   color: #3d3d3d;
 }
-.justcoffee h2 {
+.adminSingleProductView h2 {
   position: relative;
   font-family: "Ropa Sans", sans-serif;
   font-weight: 400;
@@ -710,16 +755,16 @@ font-size: 30px;
   color:#3d3d3d;
 }
 
-.userListcoffee{
+.usersListContainer{
   margin: 25px;
   border: 4px ridge rgb(168, 168, 168);
 
 }
-.list{
+.usersListHeader{
   margin: 10px;
 }
-
-.sincontan{
+/*single product view css*/
+.singleProductContainer{
   margin: 10px;
   padding: 10px;
   display:flex;
@@ -728,20 +773,19 @@ font-size: 30px;
   margin-top: 100px;
   flex-direction: column;
 }
-.sinimg{
+.singleProductImg{
   height:250px;
   border-radius: 25px;
   margin-bottom: 15px;
 }
 
-.name-description-container{
-
+.name-description-container {
 display: flex;
 flex-direction: column;
 max-width: 550px;
 }
 
-.sinheader {
+.singleProductHeader {
   align-self: center;
   margin-bottom: 25px;
 }
@@ -787,6 +831,8 @@ display: flex;
   margin: 5px;
   font-size: 20px;
 }
+
+/* css code for cart features*/ 
 
 .remove-from-cart {
   margin-left: auto;
@@ -964,6 +1010,7 @@ display: flex;
   margin-top: 50px;
 }
 
+/* return feature */
  
 .return-to-products-button {
   --b: 3px;   /* border thickness */
@@ -1021,12 +1068,8 @@ display: flex;
   margin-left: 10px;
   margin-right: 10px;
 }
- .outlog{
-  margin:2px;
- }
-
-
-#search-bar {
+ 
+#search-bar-container {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -1034,7 +1077,7 @@ display: flex;
   width: 200px;
 }
 
-.search-bar-container {
+.homePageBodyContainer {
   display: flex;
   flex-direction: column;
   align-items: center;

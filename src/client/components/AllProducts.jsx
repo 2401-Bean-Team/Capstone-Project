@@ -48,8 +48,8 @@ export default function AllProducts() {
     }, [coffee, filterInput]);
 
     return (
-        <div className='search-bar-container'>
-            <div id='search-bar'>
+        <div className='homePageBodyContainer'>
+            <div id='search-bar-container '>
                 <label>
                     Search Coffee:
                     <input

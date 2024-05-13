@@ -83,7 +83,7 @@ const Register = ({ setToken, token, setEmail, email }) => {
 
 
   return (
-    <div className='adminlog' >
+    <div className='loginContainer' >
 
       <form onSubmit={handleSubmit}>
       <h2>Register</h2>
@@ -121,7 +121,7 @@ const Register = ({ setToken, token, setEmail, email }) => {
           />
         </div>
         <button
-        className='butto' type="submit">Register</button>
+        className='loginButton' type="submit">Register</button>
       </form>
       <p>{message}</p>
     </div>

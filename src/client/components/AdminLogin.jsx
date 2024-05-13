@@ -49,7 +49,7 @@ const AdminLogin = ({ setToken, setName, name }) => {
   };
 
   return (
-    <div className='adminlog'>
+    <div className='adminLoginContainer'>
       <h2> Admin Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -73,7 +73,7 @@ const AdminLogin = ({ setToken, setName, name }) => {
             required
           />
         </div>
-        <button className='butto' type='submit'>Login</button>
+        <button className='loginButton' type='submit'>Login</button>
       </form>
       <p>{message}</p>
     </div>

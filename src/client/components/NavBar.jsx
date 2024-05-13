@@ -33,7 +33,7 @@ export default function NavBar({ token }) {
   </div>
 </nav>
 <img className='logo' src="https://pbs.twimg.com/media/GJInK2jboAAHHA3?format=jpg&name=small" alt="logo"></img>
-<Link className='icon' to="/cart"><i className="fa fa-shopping-cart"></i></Link>
+<Link className='shoppingCartIcon' to="/cart"><i className="fa fa-shopping-cart"></i></Link>
 
 
 </div>

@@ -188,15 +188,15 @@ const removeItem = async () => {
     }
 
     return (
-    <div className='sincontan'>
+    <div className='singleProductContainer'>
         <div className="image-details-container">
             <div className= "image-price-roast">
-                <img className='sinimg' src={product.image} alt={product.name} />
+                <img className='singleProductImg' src={product.image} alt={product.name} />
                 <h3 className="single-price-roast" >Price: ${product.price}</h3> 
                 <h3 className="single-price-roast" >Roast: {product.roast} </h3> 
             </div>
             <div className="name-description-container">
-                <h1 className ="sinheader">{product.name}</h1>
+                <h1 className ="singleProductHeader">{product.name}</h1>
                 <h3 className="single-description"> {product.description}</h3>
 
              

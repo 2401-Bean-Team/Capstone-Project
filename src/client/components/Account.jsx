@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+ import { useState, useEffect } from "react"
 import axios from "axios"
 import { useNavigate, NavLink } from "react-router-dom";
 
@@ -65,7 +65,8 @@ export default function Account({ token, setToken, email, password }) {
              <h1> <NavLink className="outlog" to='/login'> Login </NavLink> </h1>
               <h1 className="outlog"> or </h1>
                <h1 className="outlog"> <NavLink to='/register'>Register</NavLink></h1>
-    </div>}
+    </div>
+    }
     return (
         <>
 

@@ -52,7 +52,7 @@ const Login = ({ setToken, setEmail, email }) => {
   };
 
   return (
-    <div className='adminlog' >
+    <div className='loginContainer' >
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -78,7 +78,7 @@ const Login = ({ setToken, setEmail, email }) => {
             required
           />
         </div>
-        <button className='butto' type='submit'>Login</button>
+        <button className='loginButton' type='submit'>Login</button>
       </form>
       <p>{message}</p>
     </div>
