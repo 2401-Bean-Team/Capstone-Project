@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
+import { useNavigate } from "react-router-dom"
+ 
 
 //need to add usestate and ternary to determine if logged in
 //before displaying account/cart... if so do not display login/register
 
 export default function NavBar({ token }) {
+  const navigate = useNavigate()
 
     return <div className='NAVBAR'>
     <nav role="navigation">
@@ -32,7 +35,7 @@ export default function NavBar({ token }) {
     </ul>
   </div>
 </nav>
-<img className='logo' src="https://pbs.twimg.com/media/GJInK2jboAAHHA3?format=jpg&name=small" alt="logo"></img>
+<img className='logo' src="https://pbs.twimg.com/media/GJInK2jboAAHHA3?format=jpg&name=small" alt="logo" onClick={()=> navigate("/")}></img>
 <Link className='shoppingCartIcon' to="/cart"><i className="fa fa-shopping-cart"></i></Link>
 
 
