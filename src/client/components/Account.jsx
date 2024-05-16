@@ -60,12 +60,8 @@ export default function Account({ token, setToken, email, password }) {
 
     if (!user ||  !token) {
         return <div className="logout">
-            <h1 className="outlog">Logged out, please </h1>
-            <br></br>
-             <h1> <NavLink className="outlog" to='/login'> Login </NavLink> </h1>
-              <h1 className="outlog"> or </h1>
-               <h1 className="outlog"> <NavLink to='/register'>Register</NavLink></h1>
-    </div>
+            <h1 className="outlog">Logged out, please <NavLink className="outlog" to='/login'> Login </NavLink> or <NavLink to='/register'>Register</NavLink></h1> 
+            </div>
     }
     return (
         <>
