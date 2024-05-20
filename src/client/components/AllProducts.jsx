@@ -49,25 +49,21 @@ export default function AllProducts() {
 
     return (
         <div className='homePageBodyContainer'>
-            <div id='search-bar-container '>
-                <label>
-                    Search Coffee:
-                    <input
-                        id='search-bar'
-                        placeholder='Search our products by name or roast'
-                        value={searchInput}
-                        onChange={searchHandler} />
-                </label>
-                <label>Filter by Roast 
+            <div id='search-bar-container '> 
+                <input
+                    type="text"
+                    id='search-bar'
+                    placeholder='Search our products by name'
+                    value={searchInput}
+                    onChange={searchHandler} />   
                 <select onChange={filterHandler}>
-                    <option value="">All</option>
+                    <option value="">Filter by Roast</option>
                     <option value="Dark" >Dark</option> 
                     <option value="Medium/Dark" >Medium/Dark</option>
                     <option value="Medium">Medium</option> 
                     <option value="Light/Medium">Light/Medium</option>
                     <option value="Light">Light</option>
-                </select>
-                </label>
+                </select>  
             </div>
             {error && <div>Error: {error}</div>}
         
