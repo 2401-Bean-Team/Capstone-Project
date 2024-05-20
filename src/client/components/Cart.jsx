@@ -200,7 +200,7 @@ export default function ShoppingCart({ token, email }) {
 
 
     if (!user) {
-        return <div className="logout"><h1>Hey, friend you're logged out - please <NavLink to='/login'>Login</NavLink> or <NavLink to='/register'>Register</NavLink></h1>
+        return <div className="logged-out-message"><h1>Hey, friend you're logged out - please <NavLink to='/login'>Login</NavLink> or <NavLink to='/register'>Register</NavLink></h1>
     </div>}
 
     if(products.length  === 0){
