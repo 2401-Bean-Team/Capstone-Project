@@ -71,18 +71,22 @@ export default function AllProducts() {
             </div>
             {error && <div>Error: {error}</div>}
         
-            <div className="allCoffee">
+            {filteredCoffees.length === 0
+            ?
+            <h1 className="searchError">No product matches your search. </h1>
+            : 
+              <div className="allCoffee">
                 {filteredCoffees.map(c => (
-                    <div key={c.id} className="coffee">
-                        <Link to={`/coffee/${c.id}`}>
-                            <img src={c.image} alt={c.name} />
-                            <h1>{c.name}</h1>
-                            <h2>${c.price}</h2>
-                            <h2>{c.roast}</h2>
-                        </Link>
-                    </div>
+                  <div key={c.id} className="coffee">
+                    <Link to={`/coffee/${c.id}`}>
+                      <img src={c.image} alt={c.name} />
+                        <h1>{c.name}</h1>
+                        <h2>${c.price}</h2>
+                        <h2>{c.roast}</h2>
+                    </Link>
+                  </div>
                 ))}    
-            </div>
+            </div>}
         </div>     
     );
 }
